@@ -43,6 +43,11 @@ function getRouter() {
         defaultOrder: {
             "_updatedDate": -1
         },
+        defaultFilter: (request, response, next) => {
+            return {
+                "_createdBy": request.user.username
+            };
+        },
         defaultSelect: ["no", "refNo", "roNo", "shipmentDate", "buyer", "unit.name", "unit.division.name","isPosted"]
     });
 
