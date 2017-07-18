@@ -9,12 +9,14 @@ function getRouter() {
     var router = new Router();
     router.get("/", passport, (request, response, next) => {
         db.get().then(db => {
-            var manager = new Manager(db, request.user);
+            var manager = new PurchaseRequestManager(db, request.user);
 
-            var keyword = request.keyword;
-            manager.getPurchaseRequestByTag(keyword)
-                .then(docs => {
-                    var result = resultFormatter.ok(apiVersion, 200, docs.data);
+            var keyword = request.query.filter.tag;
+            var shipmentDate = request.query.filter.shipmentDate;
+
+            manager.getPurchaseRequestByTag(keyword, shipmentDate)
+                .then(data => {
+                    var result = resultFormatter.ok(apiVersion, 200, data);
                     response.send(200, result);
                 })
                 .catch(e => {
