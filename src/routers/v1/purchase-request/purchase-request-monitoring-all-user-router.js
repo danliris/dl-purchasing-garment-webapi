@@ -46,7 +46,7 @@ function getRouter() {
                                 var _item = {
                                     "No": index,
                                     "Unit": `${purchaseRequest.unit.division.name} - ${purchaseRequest.unit.name}`,
-                                    "Kategori": purchaseRequest.category.name,
+                                    "Kategori": item.category.name,
                                     "Tanggal PR": moment(new Date(purchaseRequest.date)).add(offset, 'h').format(dateFormat),
                                     "Tanggal Shipment": moment(new Date(purchaseRequest.shipmentDate)).add(offset, 'h').format(dateFormat),
                                     "Nomor RO": purchaseRequest.roNo,
