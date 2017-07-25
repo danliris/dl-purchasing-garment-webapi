@@ -58,10 +58,12 @@ function getJWTRouter() {
     router.get("/:id", passport, (request, response, next) => {
         var user = request.user;
         var id = request.params.id;
+        var query = request.query;
+        query.select = query.select ? query.select : typeof defaultSelect === "function" ? defaultSelect(request, response, next) : defaultSelect;
 
         getManager(user)
             .then((manager) => {
-                return manager.getSingleByIdOrDefault(id);
+                return manager.getSingleByIdOrDefault(id, query.select);
             })
             .then((doc) => {
                 var result;
