@@ -27,6 +27,8 @@ var v1PurchaseOrderExternalCancelRouter = require('../src/routers/v1/purchase-or
 var v1PurchaseOrderExternalUnpostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-unpost-router');
 // var v1PurchaseOrderExternalCloseRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-close-router');
 
+//ETL
+var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-purchase-requests-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -36,25 +38,28 @@ module.exports = function (server) {
     v1PurchaseRequestMonitoringRouter().applyRoutes(server, "/purchase-requests/monitoring");
     v1PurchaseRequestRouter().applyRoutes(server, "/purchase-requests");
 
-     //PURCHASE ORDER
+    //PURCHASE ORDER
     v1PurchaseOrderByTagsRouter().applyRoutes(server, "/purchase-orders/by-tags");
-    v1PurchaseOrderSplitRouter().applyRoutes(server,                        "/purchase-orders/split");
+    v1PurchaseOrderSplitRouter().applyRoutes(server, "/purchase-orders/split");
     // v1POMonitoringByUserRouter().applyRoutes(server,                        "/purchase-orders/monitoring/by-user");
     // v1POMonitoringRouter().applyRoutes(server,                              "/purchase-orders/monitoring");
     // v1PurchaseOrderUnpostedRouter().applyRoutes(server,                     "/purchase-orders/unposted");
-    v1PurchaseOrderByUserRouter().applyRoutes(server,                       "/purchase-orders/by-user");
+    v1PurchaseOrderByUserRouter().applyRoutes(server, "/purchase-orders/by-user");
     // v1ReportPoCategoryPeriodeRouter().applyRoutes(server,                   "/purchase-orders/reports/categories");
     // v1ReportPoUnitPeriodeRouter().applyRoutes(server,                       "/purchase-orders/reports/units");
     // v1ReportPoSubUnitCategoriesPeriodeRouter().applyRoutes(server,          "/purchase-orders/reports/units-categories");
     // v1ReportPoSubUnitPeriodeRouter().applyRoutes(server,                    "/purchase-orders/reports/subUnits");
-    v1PurchaseOrderRouter().applyRoutes(server,                             "/purchase-orders");
+    v1PurchaseOrderRouter().applyRoutes(server, "/purchase-orders");
 
     //PURCHASE ORDER EXTERNAL
-    v1PurchaseOrderExternalPostRouter().applyRoutes(server,                 "/v1/purchase-orders/externals/post"); 
-    v1PurchaseOrderExternalByUserRouter().applyRoutes(server,               "/v1/purchase-orders/externals/by-user");
-    v1PurchaseOrderExternalRouter().applyRoutes(server,                     "/v1/purchase-orders/externals");
-    v1PurchaseOrderExternalCancelRouter().applyRoutes(server,               "/v1/purchase-orders/externals/cancel");
-    v1PurchaseOrderExternalUnpostRouter().applyRoutes(server,               "/v1/purchase-orders/externals/unpost");
+    v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/v1/purchase-orders/externals/post");
+    v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/v1/purchase-orders/externals/by-user");
+    v1PurchaseOrderExternalRouter().applyRoutes(server, "/v1/purchase-orders/externals");
+    v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/v1/purchase-orders/externals/cancel");
+    v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/v1/purchase-orders/externals/unpost");
     // v1PurchaseOrderExternalCloseRouter().applyRoutes(server,                "/v1/purchase-orders/externals/close");
+
+    //ETL
+    v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/etl-garment-purchase-requests");
 
 };

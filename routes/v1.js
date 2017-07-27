@@ -26,6 +26,8 @@ var v1PurchaseOrderExternalRouter = require('../src/routers/v1/purchase-order-ex
 var v1PurchaseOrderExternalCancelRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-cancel-router');
 var v1PurchaseOrderExternalUnpostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-unpost-router');
 // var v1PurchaseOrderExternalCloseRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-close-router');
+//ETL
+var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-purchase-requests-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -50,11 +52,13 @@ module.exports = function (server) {
     v1PurchaseOrderRouter().applyRoutes(server, "/v1/purchase-orders");
 
     //PURCHASE ORDER EXTERNAL
-    v1PurchaseOrderExternalPostRouter().applyRoutes(server,                 "/purchase-orders/externals/post"); 
-    v1PurchaseOrderExternalByUserRouter().applyRoutes(server,               "/purchase-orders/externals/by-user");
+    v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/purchase-orders/externals/post");
+    v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/purchase-orders/externals/by-user");
     v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders/externals");
-    v1PurchaseOrderExternalCancelRouter().applyRoutes(server,               "/purchase-orders/externals/cancel");
-    v1PurchaseOrderExternalUnpostRouter().applyRoutes(server,               "/purchase-orders/externals/unpost");
+    v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/purchase-orders/externals/cancel");
+    v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/purchase-orders/externals/unpost");
     // v1PurchaseOrderExternalCloseRouter().applyRoutes(server,                "/purchase-orders/externals/close");
-
+    
+    //ETL
+    v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/v1/etl-garment-purchase-requests");
 };
