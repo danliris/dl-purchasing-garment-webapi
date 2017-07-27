@@ -12,8 +12,7 @@ function getRouter() {
             return {
                 "_createdBy": request.user.username
             };
-        },
-        defaultSelect: ["no", "refNo", "roNo", "shipmentDate", "buyer", "unit.name", "unit.division.name","isPosted"]
+        }
     });
     return router;
 }

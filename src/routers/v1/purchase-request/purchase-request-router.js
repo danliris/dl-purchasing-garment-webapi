@@ -7,8 +7,7 @@ function getRouter() {
         version: apiVersion,
         defaultOrder: {
             "_updatedDate": -1
-        },
-        defaultSelect: ["no", "refNo", "roNo", "shipmentDate", "buyer", "unit.name", "unit.division.name","isPosted"]
+        }
     });
     return router;
 }
