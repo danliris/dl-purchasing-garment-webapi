@@ -18,6 +18,9 @@ var v1PurchaseOrderByUserRouter = require('../src/routers/v1/purchase-order/purc
 // var v1ReportPoSubUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-unit-router');
 var v1PurchaseOrderRouter = require('../src/routers/v1/purchase-order/purchase-order-router');
 
+//ETL
+var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-purchase-requests-router');
+
 module.exports = function (server) {
     //PURCHASE REQUEST
     v1PurchaseRequestByTagsRouter().applyRoutes(server, "/purchase-requests/by-tags");
@@ -37,4 +40,7 @@ module.exports = function (server) {
     // v1ReportPoSubUnitCategoriesPeriodeRouter().applyRoutes(server,          "/purchase-orders/reports/units-categories");
     // v1ReportPoSubUnitPeriodeRouter().applyRoutes(server,                    "/purchase-orders/reports/subUnits");
     v1PurchaseOrderRouter().applyRoutes(server,                             "/purchase-orders");
+
+    //ETL
+    v1ETLGarmentPurchaseRequestRouter().applyRoutes(server,                 "/etl-garment-purchase-requests");
 };
