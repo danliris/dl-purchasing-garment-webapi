@@ -35,8 +35,15 @@ var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-p
 // var v1DOMonitoringByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-by-user-router');
 // var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
 // var v1DeliveryOrderBySupplierRouter = require('../src/routers/v1/delivery-order/delivery-order-by-supplier-router');
+var v1DeliveryOrderNoInvoiceRouter = require('../src/routers/v1/delivery-order/delivery-order-no-invoice-router');
 var v1DeliveryOrderByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-by-user-router');
 var v1DeliveryOrderRouter = require('../src/routers/v1/delivery-order/delivery-order-router');
+
+// IINVOICE NOTE
+var v1InvoiceNoteVatPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-vat-pdf-router');
+var v1InvoiceNoteIncomeTaxPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-income-tax-pdf-router');
+var v1InvoiceNoteByUserRouter = require('../src/routers/v1/invoice-note/invoice-note-by-user-router');
+var v1InvoiceNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -76,7 +83,14 @@ module.exports = function (server) {
     // v1DOMonitoringByUserRouter().applyRoutes(server,                        "/v1/delivery-orders/monitoring/by-user");
     // v1DOMonitoringRouter().applyRoutes(server,                              "/v1/delivery-orders/monitoring");
     // v1DeliveryOrderBySupplierRouter().applyRoutes(server,                   "/v1/delivery-orders/by-supplier");
+    v1DeliveryOrderNoInvoiceRouter().applyRoutes(server,                   "/v1/delivery-orders/no-invoice");
     v1DeliveryOrderByUserRouter().applyRoutes(server,                       "/v1/delivery-orders/by-user");
     v1DeliveryOrderRouter().applyRoutes(server,                             "/v1/delivery-orders");
+
+    //INVOICE NOTE
+    v1InvoiceNoteIncomeTaxPdfRouter().applyRoutes(server, "/v1/invoice-notes/pdf/income-tax");
+    v1InvoiceNoteVatPdfRouter().applyRoutes(server, "/v1/invoice-notes/pdf/vat");
+    v1InvoiceNoteByUserRouter().applyRoutes(server,                       "/v1/invoice-notes/by-user");
+    v1InvoiceNoteRouter().applyRoutes(server,                             "/v1/invoice-notes");
  
 };
