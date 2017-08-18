@@ -38,6 +38,10 @@ var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-p
 var v1DeliveryOrderByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-by-user-router');
 var v1DeliveryOrderRouter = require('../src/routers/v1/delivery-order/delivery-order-router');
 
+// CUSTOMS
+var v1CustomsRouter = require('../src/routers/v1/customs/customs-router');
+var v1MonitoringCustomsRouter = require('../src/routers/v1/customs/customs-monitoring-router');
+
 module.exports = function (server) {
     //PURCHASE REQUEST
     v1PurchaseRequestByTagsRouter().applyRoutes(server, "/purchase-requests/by-tags");
@@ -77,6 +81,10 @@ module.exports = function (server) {
     // v1DeliveryOrderBySupplierRouter().applyRoutes(server,                   "/delivery-orders/by-supplier");
     v1DeliveryOrderByUserRouter().applyRoutes(server,                       "/delivery-orders/by-user");
     v1DeliveryOrderRouter().applyRoutes(server,                             "/delivery-orders");
+
+    // CUSTOMS
+    v1MonitoringCustomsRouter().applyRoutes(server,                         "customs/reports/customs");
+    v1CustomsRouter().applyRoutes(server,                                   "customs");
   
 
 };
