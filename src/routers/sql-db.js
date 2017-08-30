@@ -1,4 +1,13 @@
 var sql = require("mssql");
+
+var encryptConnection;
+
+if (process.env.ENCRYPT == false || process.env.ENCRYPT == "false") {
+    encryptConnection = false;
+} else {
+    encryptConnection = true;
+}
+
 var config = {
     server: process.env.SQL_SERVER,
     database: process.env.SQL_DATABASE,
@@ -6,7 +15,8 @@ var config = {
     password: process.env.SQL_PASSWORD,
     port: process.env.SQL_PORT,
     options: {
-        encrypt: process.env.ENCRYPT != "false" ? true : false,
+        // encrypt: process.env.ENCRYPT != "false" ? true : false,
+        encrypt: encryptConnection,
     },
     connectionTimeout: 120 * 60 * 1000,
     requestTimeout: 1000000
