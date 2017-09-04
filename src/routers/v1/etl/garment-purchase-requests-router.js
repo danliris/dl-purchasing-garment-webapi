@@ -20,14 +20,13 @@ function getRouter() {
     });
 
     router.post('/migrate/file', passport, (request, response, next) => {
-         request.connection.setTimeout(120 * 60000);
+        request.connection.setTimeout(120 * 60000);
 
         var user = request.user;
         var data = request.body;
 
-       
-
         var tables = data.tables.split("&");
+        // var date = data.tables2;
         var table1 = tables[0].trim();
         var table2 = tables[1].trim();
 
@@ -40,13 +39,13 @@ function getRouter() {
                         username: "unit-test"
                     }, sql);
                     manager.run(table1, table2)
-                        // .then(data => {
-                        //     var result = resultFormatter.ok(apiVersion, 200, data);
-                        //     response.send(200, result);
-                        // })
-                        // .catch(e => {
-                        //     response.send(500, "gagal");
-                        // });
+                        .then(data => {
+                            var result = resultFormatter.ok(apiVersion, 200, data);
+                            response.send(200, result);
+                        })
+                        .catch(e => {
+                            response.send(500, "gagal");
+                        });
                 }).catch(e => {
                     var error = resultFormatter.fail(apiVersion, 400, e);
                     response.send(400, error);

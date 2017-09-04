@@ -39,6 +39,9 @@ var v1DeliveryOrderNoInvoiceRouter = require('../src/routers/v1/delivery-order/d
 var v1DeliveryOrderByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-by-user-router');
 var v1DeliveryOrderRouter = require('../src/routers/v1/delivery-order/delivery-order-router');
 
+// CUSTOMS
+var v1CustomsRouter = require('../src/routers/v1/customs/customs-router');
+var v1MonitoringCustomsRouter = require('../src/routers/v1/customs/customs-monitoring-router');
 // IINVOICE NOTE
 var v1InvoiceNoteVatPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-vat-pdf-router');
 var v1InvoiceNoteIncomeTaxPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-income-tax-pdf-router');
@@ -94,6 +97,10 @@ module.exports = function (server) {
     v1DeliveryOrderByUserRouter().applyRoutes(server, "/delivery-orders/by-user");
     v1DeliveryOrderRouter().applyRoutes(server, "/delivery-orders");
 
+    // CUSTOMS
+    v1MonitoringCustomsRouter().applyRoutes(server,                         "customs/reports/customs");
+    v1CustomsRouter().applyRoutes(server,                                   "customs");
+  
     //INVOICE NOTE
     v1InvoiceNoteIncomeTaxPdfRouter().applyRoutes(server, "/invoice-notes/pdf/income-tax");
     v1InvoiceNoteVatPdfRouter().applyRoutes(server, "/invoice-notes/pdf/vat");
