@@ -35,7 +35,7 @@ var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-p
 // DELIVERY ORDER
 // var v1DOMonitoringByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-by-user-router');
 // var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
-// var v1DeliveryOrderBySupplierRouter = require('../src/routers/v1/delivery-order/delivery-order-by-supplier-router');
+var v1DeliveryOrderBySupplierRouter = require('../src/routers/v1/delivery-order/delivery-order-by-supplier-router');
 var v1DeliveryOrderNoInvoiceRouter = require('../src/routers/v1/delivery-order/delivery-order-no-invoice-router');
 var v1DeliveryOrderByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-by-user-router');
 var v1DeliveryOrderRouter = require('../src/routers/v1/delivery-order/delivery-order-router');
@@ -44,11 +44,19 @@ var v1DeliveryOrderRouter = require('../src/routers/v1/delivery-order/delivery-o
 var v1CustomsRouter = require('../src/routers/v1/customs/customs-router');
 var v1MonitoringCustomsRouter = require('../src/routers/v1/customs/customs-monitoring-router');
 
-// IINVOICE NOTE
+// INVOICE NOTE
 var v1InvoiceNoteVatPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-vat-pdf-router');
 var v1InvoiceNoteIncomeTaxPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-income-tax-pdf-router');
 var v1InvoiceNoteByUserRouter = require('../src/routers/v1/invoice-note/invoice-note-by-user-router');
 var v1InvoiceNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-router');
+
+// UNIT RECEIPT NOTE
+// var v1UnitReceiptNoteMonitoringByUserRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-by-user-router');
+// var v1UnitReceiptNoteMonitoringRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-router');
+// var v1UnitReceiptWithoutSpbRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-without-spb-router');
+var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-by-user-router');
+// var v1UnitPaymentOrderSupplierRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-suplier-unit-router');
+var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -78,20 +86,20 @@ module.exports = function (server) {
     v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/purchase-orders/externals/by-user");
     v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/purchase-orders/externals/cancel");
     v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/purchase-orders/externals/unpost");
-    v1PurchaseOrderExternalCloseRouter().applyRoutes(server,                "/purchase-orders/externals/close");
-    v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server,                "/purchase-orders/externals/by-supplier");
+    v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/purchase-orders/externals/close");
+    v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server, "/purchase-orders/externals/by-supplier");
     v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders/externals");
-    
+
     //ETL
     v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/v1/etl-garment-purchase-requests");
 
     //DELIVERY ORDER
     // v1DOMonitoringByUserRouter().applyRoutes(server,                        "/v1/delivery-orders/monitoring/by-user");
     // v1DOMonitoringRouter().applyRoutes(server,                              "/v1/delivery-orders/monitoring");
-    // v1DeliveryOrderBySupplierRouter().applyRoutes(server,                   "/v1/delivery-orders/by-supplier");
-    v1DeliveryOrderNoInvoiceRouter().applyRoutes(server,                   "/v1/delivery-orders/no-invoice");
-    v1DeliveryOrderByUserRouter().applyRoutes(server,                       "/v1/delivery-orders/by-user");
-    v1DeliveryOrderRouter().applyRoutes(server,                             "/v1/delivery-orders");
+    v1DeliveryOrderBySupplierRouter().applyRoutes(server, "/v1/delivery-orders/by-supplier");
+    v1DeliveryOrderNoInvoiceRouter().applyRoutes(server, "/v1/delivery-orders/no-invoice");
+    v1DeliveryOrderByUserRouter().applyRoutes(server, "/v1/delivery-orders/by-user");
+    v1DeliveryOrderRouter().applyRoutes(server, "/v1/delivery-orders");
 
     //CUSTOMS
     v1MonitoringCustomsRouter().applyRoutes(server,                         "/v1/customs/reports");
@@ -100,7 +108,15 @@ module.exports = function (server) {
     //INVOICE NOTE
     v1InvoiceNoteIncomeTaxPdfRouter().applyRoutes(server, "/v1/invoice-notes/pdf/income-tax");
     v1InvoiceNoteVatPdfRouter().applyRoutes(server, "/v1/invoice-notes/pdf/vat");
-    v1InvoiceNoteByUserRouter().applyRoutes(server,                       "/v1/invoice-notes/by-user");
-    v1InvoiceNoteRouter().applyRoutes(server,                             "/v1/invoice-notes");
- 
+    v1InvoiceNoteByUserRouter().applyRoutes(server, "/v1/invoice-notes/by-user");
+    v1InvoiceNoteRouter().applyRoutes(server, "/v1/invoice-notes");
+
+    //UNIT RECEIPT NOTE
+    // v1UnitReceiptNoteMonitoringByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring/by-user");
+    // v1UnitReceiptNoteMonitoringRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring");
+    // v1UnitReceiptWithoutSpbRouter().applyRoutes(server, "/v1/unit-receipt-without-spb");
+    v1UnitReceiptNoteByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-user");
+    // v1UnitPaymentOrderSupplierRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-supplier-unit");
+    v1UnitReceiptNoteRouter().applyRoutes(server, "/v1/unit-receipt-notes");
+
 };
