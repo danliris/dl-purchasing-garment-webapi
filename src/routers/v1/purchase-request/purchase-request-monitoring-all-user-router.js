@@ -50,15 +50,16 @@ function getRouter() {
                                     "Tanggal PR": moment(new Date(purchaseRequest.date)).add(offset, 'h').format(dateFormat),
                                     "Tanggal Shipment": moment(new Date(purchaseRequest.shipmentDate)).add(offset, 'h').format(dateFormat),
                                     "Nomor RO": purchaseRequest.roNo,
-                                    "Buyer": purchaseRequest.buyer,
+                                    "Buyer": purchaseRequest.buyer.name,
                                     "Artikel": purchaseRequest.artikel,
                                     "Nomor PR": purchaseRequest.no,
-                                    "Nomor Referensi PR": purchaseRequest.refNo,
+                                    "Nomor Referensi PR": item.refNo,
                                     "Kode Barang": item.product.code,
                                     "Nama Barang": item.product.name,
                                     "Jumlah": item.quantity,
                                     "Satuan": item.product.uom.unit,
-                                    "Tanggal Diminta Datang": purchaseRequest.expectedDeliveryDate ? moment(new Date(purchaseRequest.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
+                                    //"Tanggal Diminta Datang": purchaseRequest.expectedDeliveryDate ? moment(new Date(purchaseRequest.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
+                                    "Keterangan": item.remark,
                                     "Status": status
                                 }
                                 data.push(_item);
@@ -79,7 +80,8 @@ function getRouter() {
                             "Nama Barang": "string",
                             "Jumlah": "number",
                             "Satuan": "string",
-                            "Tanggal Diminta Datang": "string",
+                            //"Tanggal Diminta Datang": "string",
+                            "Keterangan":"string",
                             "Status": "string",
                         };
                         response.xls(`Monitoring Garment Purchase Request - ${moment(new Date()).format(dateFormat)}.xlsx`, data, options);
