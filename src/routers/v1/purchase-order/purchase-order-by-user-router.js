@@ -32,6 +32,21 @@ function getJWTRouter() {
         query.order = Object.assign({}, query.order, typeof defaultOrder === "function" ? defaultOrder(request, response, next) : defaultOrder, query.order);
         query.select = query.select ? query.select : ["buyer.name", "purchaseRequest.refNo", "purchaseRequest.shipmentDate", "purchaseRequest.no", "purchaseRequest.roNo", "_createdBy", "purchaseOrderExternal.isPosted", "isPosted"];
 
+        if(query.order.quantity){
+            var a = query.order.quantity
+            query.order["items.0.defaultQuantity"] = a;
+            delete query.order.quantity
+        }
+        if(query.order.product){
+            var a = query.order.product
+            query.order["items.0.product.name"] = a;
+            delete query.order.product
+        }
+        if(query.order.uom){
+            var a = query.order.uom
+            query.order["items.0.defaultUom.unit"] = a;
+            delete query.order.uom
+        }
         getManager(user)
             .then((manager) => {
                 return manager.read(query);

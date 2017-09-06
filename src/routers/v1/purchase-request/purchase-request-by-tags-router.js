@@ -12,9 +12,10 @@ function getRouter() {
             var manager = new PurchaseRequestManager(db, request.user);
 
             var keyword = request.query.filter.tag;
-            var shipmentDate = request.query.filter.shipmentDate;
+            var shipmentDateFrom = request.query.filter.shipmentDateFrom;
+            var shipmentDateTo = request.query.filter.shipmentDateTo;
 
-            manager.getPurchaseRequestByTag(keyword, shipmentDate)
+            manager.getPurchaseRequestByTag(keyword, shipmentDateFrom, shipmentDateTo)
                 .then(data => {
                     var result = resultFormatter.ok(apiVersion, 200, data);
                     response.send(200, result);
