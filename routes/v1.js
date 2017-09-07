@@ -79,7 +79,9 @@ module.exports = function (server) {
     // v1ReportPoSubUnitCategoriesPeriodeRouter().applyRoutes(server,          "/v1/purchase-orders/reports/units-categories");
     // v1ReportPoSubUnitPeriodeRouter().applyRoutes(server,                    "/v1/purchase-orders/reports/subUnits");
     v1PurchaseOrderRouter().applyRoutes(server, "/v1/purchase-orders");
-    v1PurchaseOrderReportRouter().applyRoutes(server,"/v1/purchase-orders-report");
+
+    //report
+    v1PurchaseOrderReportRouter().applyRoutes(server, "/v1/purchase-orders-report");
 
     //PURCHASE ORDER EXTERNAL
     v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/purchase-orders/externals/post");
@@ -102,8 +104,8 @@ module.exports = function (server) {
     v1DeliveryOrderRouter().applyRoutes(server, "/v1/delivery-orders");
 
     //CUSTOMS
-    v1MonitoringCustomsRouter().applyRoutes(server,                         "/v1/customs/reports");
-    v1CustomsRouter().applyRoutes(server,                                   "/v1/customs");
+    v1MonitoringCustomsRouter().applyRoutes(server, "/v1/customs/reports");
+    v1CustomsRouter().applyRoutes(server, "/v1/customs");
 
     //INVOICE NOTE
     v1InvoiceNoteIncomeTaxPdfRouter().applyRoutes(server, "/v1/invoice-notes/pdf/income-tax");

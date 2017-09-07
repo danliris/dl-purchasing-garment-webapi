@@ -77,6 +77,8 @@ module.exports = function (server) {
     // v1ReportPoSubUnitCategoriesPeriodeRouter().applyRoutes(server,          "/purchase-orders/reports/units-categories");
     // v1ReportPoSubUnitPeriodeRouter().applyRoutes(server,                    "/purchase-orders/reports/subUnits");
     v1PurchaseOrderRouter().applyRoutes(server, "/purchase-orders");
+
+    //report
     v1PurchaseOrderReportRouter().applyRoutes(server,"/purchase-orders-report")
 
     //PURCHASE ORDER EXTERNAL
