@@ -124,7 +124,7 @@ module.exports = function (server) {
     v1UnitReceiptNoteRouter().applyRoutes(server, "/v1/unit-receipt-notes");
 
     //INTERN NOTE
-    v1InternNoteByUserRouter().applyRoutes(server, "/intern-notes/by-user");
-    v1InternNoteRouter().applyRoutes(server, "/intern-notes");
+    v1InternNoteByUserRouter().applyRoutes(server, "/v1/intern-notes/by-user");
+    v1InternNoteRouter().applyRoutes(server, "/v1/intern-notes");
 
 };
