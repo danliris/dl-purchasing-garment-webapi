@@ -19,7 +19,8 @@ function getRouter() {
             var filter = {
                 "_deleted": false,
                 "hasInternNote": false,
-                "supplierId": new ObjectId(query.filter.supplierId)
+                "supplierId": new ObjectId(query.filter.supplierId),
+                "currency.code": query.filter.currency
             };
             query.filter = filter;
 
