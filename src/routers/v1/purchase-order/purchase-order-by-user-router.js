@@ -30,7 +30,7 @@ function getJWTRouter() {
 
         query.filter = Object.assign({}, query.filter, typeof defaultFilter === "function" ? defaultFilter(request, response, next) : defaultFilter, query.filter, { "_createdBy": request.user.username });
         query.order = Object.assign({}, query.order, typeof defaultOrder === "function" ? defaultOrder(request, response, next) : defaultOrder, query.order);
-        query.select = query.select ? query.select : ["buyer.name", "purchaseRequest.refNo", "purchaseRequest.shipmentDate", "purchaseRequest.no", "purchaseRequest.roNo", "_createdBy", "purchaseOrderExternal.isPosted", "isPosted"];
+        query.select = query.select ? query.select : ["no","buyer.name", "purchaseRequest.refNo", "purchaseRequest.shipmentDate", "purchaseRequest.no", "purchaseRequest.roNo", "_createdBy", "purchaseOrderExternal.isPosted", "isPosted"];
 
         if(query.order.quantity){
             var a = query.order.quantity

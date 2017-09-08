@@ -18,6 +18,7 @@ var v1PurchaseOrderByUserRouter = require('../src/routers/v1/purchase-order/purc
 // var v1ReportPoSubUnitCategoriesPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-unit-category-router');
 // var v1ReportPoSubUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-unit-router');
 var v1PurchaseOrderRouter = require('../src/routers/v1/purchase-order/purchase-order-router');
+var v1PurchaseOrderReportRouter = require('../src/routers/v1/report/purchase-order-report-router');
 
 // PURCHASE ORDER EXTERNAL
 var v1PurchaseOrderExternalPostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-post-router');
@@ -79,6 +80,9 @@ module.exports = function (server) {
     // v1ReportPoSubUnitPeriodeRouter().applyRoutes(server,                    "/v1/purchase-orders/reports/subUnits");
     v1PurchaseOrderRouter().applyRoutes(server, "/v1/purchase-orders");
 
+    //report
+    v1PurchaseOrderReportRouter().applyRoutes(server, "/v1/purchase-orders-report");
+
     //PURCHASE ORDER EXTERNAL
     v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/purchase-orders/externals/post");
     v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/purchase-orders/externals/by-user");
@@ -100,8 +104,8 @@ module.exports = function (server) {
     v1DeliveryOrderRouter().applyRoutes(server, "/v1/delivery-orders");
 
     //CUSTOMS
-    v1MonitoringCustomsRouter().applyRoutes(server,                         "/v1/customs/reports");
-    v1CustomsRouter().applyRoutes(server,                                   "/v1/customs");
+    v1MonitoringCustomsRouter().applyRoutes(server, "/v1/customs/reports");
+    v1CustomsRouter().applyRoutes(server, "/v1/customs");
 
     //INVOICE NOTE
     v1InvoiceNoteIncomeTaxPdfRouter().applyRoutes(server, "/v1/invoice-notes/pdf/income-tax");
