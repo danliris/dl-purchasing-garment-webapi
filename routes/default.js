@@ -57,6 +57,10 @@ var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note
 // var v1UnitPaymentOrderSupplierRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-suplier-unit-router');
 var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-router');
 
+//PURCHASE CORRECTION
+var v1PurchasePriceCorrectionRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-router');
+var v1PurchasePriceCorrectionByUserRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-by-user-router');
+
 module.exports = function (server) {
     //PURCHASE REQUEST
     v1PurchaseRequestByTagsRouter().applyRoutes(server, "/purchase-requests/by-tags");
@@ -118,5 +122,7 @@ module.exports = function (server) {
     // v1UnitPaymentOrderSupplierRouter().applyRoutes(server, "/unit-receipt-notes/by-supplier-unit");
     v1UnitReceiptNoteRouter().applyRoutes(server, "/unit-receipt-notes");
 
-
+    //PURCHASE CORRECTION
+    v1PurchasePriceCorrectionByUserRouter().applyRoutes(server, "/purchase-price-corrections/by-user");
+    v1PurchasePriceCorrectionRouter().applyRoutes(server, "/purchase-price-corrections");
 };
