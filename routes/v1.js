@@ -60,6 +60,8 @@ var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-
 
 // PURCHASE CORRECTION
 var v1PurchaseQuantityCorrectionByUserRouter = require("../src/routers/v1/purchase-correction/purchase-quantity-correction-by-user-router");
+var v1PurchasePriceCorrectionRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-router');
+var v1PurchasePriceCorrectionByUserRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-by-user-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -126,5 +128,6 @@ module.exports = function (server) {
 
     //PURCHASE CORRECTION
     v1PurchaseQuantityCorrectionByUserRouter().applyRoutes(server, "/v1/purchase-quantity-correction/by-user");
-
+    v1PurchasePriceCorrectionByUserRouter().applyRoutes(server, "/v1/purchase-price-corrections/by-user");
+    v1PurchasePriceCorrectionRouter().applyRoutes(server, "/v1/purchase-price-corrections");
 };
