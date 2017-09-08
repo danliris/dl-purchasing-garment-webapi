@@ -17,16 +17,7 @@ function getRouter() {
             var filter = {
                 _deleted: false,
                 hasInvoice: false,
-                "supplierId": new ObjectId(query.filter.supplierId),
-                // "items": {
-                //     $elemMatch: {
-                //         "fulfillments": {
-                //             $elemMatch: {
-                //                 "currency.code": query.filter.currencyCode,
-                //             }
-                //         }
-                //     }
-                // }
+                "supplierId": new ObjectId(query.filter.supplierId)
             };
 
             query.filter = filter;
