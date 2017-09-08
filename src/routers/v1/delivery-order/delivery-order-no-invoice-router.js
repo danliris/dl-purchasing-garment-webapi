@@ -18,15 +18,15 @@ function getRouter() {
                 _deleted: false,
                 hasInvoice: false,
                 "supplierId": new ObjectId(query.filter.supplierId),
-                "items": {
-                    $elemMatch: {
-                        "fulfillments": {
-                            $elemMatch: {
-                                "currency.code": query.filter.currencyCode,
-                            }
-                        }
-                    }
-                }
+                // "items": {
+                //     $elemMatch: {
+                //         "fulfillments": {
+                //             $elemMatch: {
+                //                 "currency.code": query.filter.currencyCode,
+                //             }
+                //         }
+                //     }
+                // }
             };
 
             query.filter = filter;
