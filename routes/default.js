@@ -34,7 +34,7 @@ var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-p
 
 // DELIVERY ORDER
 // var v1DOMonitoringByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-by-user-router');
-// var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
+var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
 var v1DeliveryOrderBySupplierRouter = require('../src/routers/v1/delivery-order/delivery-order-by-supplier-router');
 var v1DeliveryOrderNoInvoiceRouter = require('../src/routers/v1/delivery-order/delivery-order-no-invoice-router');
 var v1DeliveryOrderByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-by-user-router');
@@ -95,7 +95,7 @@ module.exports = function (server) {
 
     //DELIVERY ORDER
     // v1DOMonitoringByUserRouter().applyRoutes(server,                        "/delivery-orders/monitoring/by-user");
-    // v1DOMonitoringRouter().applyRoutes(server,                              "/delivery-orders/monitoring");
+    v1DOMonitoringRouter().applyRoutes(server,     "/delivery-orders/monitoring");
     v1DeliveryOrderBySupplierRouter().applyRoutes(server, "/delivery-orders/by-supplier");
     v1DeliveryOrderNoInvoiceRouter().applyRoutes(server, "/delivery-orders/no-invoice");
     v1DeliveryOrderByUserRouter().applyRoutes(server, "/delivery-orders/by-user");
