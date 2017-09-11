@@ -1,25 +1,27 @@
 var Router = require('restify-router').Router;
 var db = require("../../../db");
-var Manager = require("dl-module").managers.garmentPurchasing.DeliveryOrderManager;
+var Manager = require("dl-module").managers.garmentPurchasing.InvoiceNoteManager;
 var resultFormatter = require("../../../result-formatter");
+var ObjectId = require("mongodb").ObjectId;
 var passport = require('../../../passports/jwt-passport');
 const apiVersion = '1.0.0';
-var ObjectId = require("mongodb").ObjectId;
 
 function getRouter() {
     var router = new Router();
     router.get("/", passport, (request, response, next) => {
         db.get().then(db => {
-            var manager = new Manager(db, request.user);
+            var manager = new Manager(db, {
+                username: 'router'
+            });
 
             var query = request.queryInfo;
 
             var filter = {
-                _deleted: false,
-                hasInvoice: false,
-                "supplierId": new ObjectId(query.filter.supplierId)
+                "_deleted": false,
+                "hasInternNote": false,
+                "supplierId": new ObjectId(query.filter.supplierId),
+                "currency.code": query.filter.currency
             };
-
             query.filter = filter;
 
             manager.read(query)
