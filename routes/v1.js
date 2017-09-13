@@ -58,6 +58,10 @@ var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note
 // var v1UnitPaymentOrderSupplierRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-suplier-unit-router');
 var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-router');
 
+//garment-currency
+var v1GarmentCurrency = require('../src/routers/v1/garment-currency/garment-currency-upload-router');
+var v1GarmentCurrencies = require('../src/routers/v1/garment-currency/garment-currency-router');
+
 module.exports = function (server) {
     //PURCHASE REQUEST
     v1PurchaseRequestByTagsRouter().applyRoutes(server, "/v1/purchase-requests/by-tags");
@@ -120,5 +124,9 @@ module.exports = function (server) {
     v1UnitReceiptNoteByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-user");
     // v1UnitPaymentOrderSupplierRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-supplier-unit");
     v1UnitReceiptNoteRouter().applyRoutes(server, "/v1/unit-receipt-notes");
+
+    //garment currency
+    v1GarmentCurrency().applyRoutes(server,"/v1/garment-currency");
+    v1GarmentCurrencies().applyRoutes(server,"/v1/garment-currencies");
 
 };

@@ -57,6 +57,10 @@ var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note
 // var v1UnitPaymentOrderSupplierRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-suplier-unit-router');
 var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-router');
 
+//garment currency
+var v1GarmentCurrencyRouter = require('../src/routers/v1/garment-currency/garment-currency-upload-router');
+var v1GarmentCurrenciesRouter = require('../src/routers/v1/garment-currency/garment-currency-router');
+
 module.exports = function (server) {
     //PURCHASE REQUEST
     v1PurchaseRequestByTagsRouter().applyRoutes(server, "/purchase-requests/by-tags");
@@ -79,7 +83,7 @@ module.exports = function (server) {
     v1PurchaseOrderRouter().applyRoutes(server, "/purchase-orders");
 
     //report
-    v1PurchaseOrderReportRouter().applyRoutes(server,"/purchase-orders-report")
+    v1PurchaseOrderReportRouter().applyRoutes(server, "/purchase-orders-report")
 
     //PURCHASE ORDER EXTERNAL
     v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/v1/purchase-orders/externals/post");
@@ -102,9 +106,9 @@ module.exports = function (server) {
     v1DeliveryOrderRouter().applyRoutes(server, "/delivery-orders");
 
     // CUSTOMS
-    v1MonitoringCustomsRouter().applyRoutes(server,                         "customs/reports/customs");
-    v1CustomsRouter().applyRoutes(server,                                   "customs");
-  
+    v1MonitoringCustomsRouter().applyRoutes(server, "customs/reports/customs");
+    v1CustomsRouter().applyRoutes(server, "customs");
+
     //INVOICE NOTE
     v1InvoiceNoteIncomeTaxPdfRouter().applyRoutes(server, "/invoice-notes/pdf/income-tax");
     v1InvoiceNoteVatPdfRouter().applyRoutes(server, "/invoice-notes/pdf/vat");
@@ -117,6 +121,10 @@ module.exports = function (server) {
     v1UnitReceiptNoteByUserRouter().applyRoutes(server, "/unit-receipt-notes/by-user");
     // v1UnitPaymentOrderSupplierRouter().applyRoutes(server, "/unit-receipt-notes/by-supplier-unit");
     v1UnitReceiptNoteRouter().applyRoutes(server, "/unit-receipt-notes");
+
+    //garment-currency
+    v1GarmentCurrencyRouter().applyRoutes(server, "/garment-currency");
+    v1GarmentCurrenciesRouter().applyRoutes(server, "/garment-currencies");
 
 
 };
