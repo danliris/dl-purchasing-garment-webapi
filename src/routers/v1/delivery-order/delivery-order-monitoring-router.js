@@ -19,8 +19,10 @@ function getRouter() {
     router.get("/", passport, function (request, response, next) {
         var user = request.user;
         var query = request.query;
-
+        query.user=user.username;
+        var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
         var doManager = {};
+        query.offset=offset;
         getManager(user)
             .then((manager) => {
                 doManager = manager;
