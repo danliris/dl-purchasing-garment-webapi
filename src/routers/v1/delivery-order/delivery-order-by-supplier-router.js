@@ -19,7 +19,7 @@ function getRouter() {
             var filter = {
                 "_deleted": false,
                 "isClosed": false,
-                "hasCustoms": true,
+                "$or": [{ hasCustoms: false, useCustoms: false }, { hasCustoms: true, useCustoms: true }],
                 "supplierId": new ObjectId(query.filter.supplierId)
             };
             query.filter = filter;
