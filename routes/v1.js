@@ -34,7 +34,7 @@ var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-p
 
 // DELIVERY ORDER
 // var v1DOMonitoringByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-by-user-router');
-// var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
+var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
 var v1DeliveryOrderBySupplierRouter = require('../src/routers/v1/delivery-order/delivery-order-by-supplier-router');
 var v1DeliveryOrderNoInvoiceRouter = require('../src/routers/v1/delivery-order/delivery-order-no-invoice-router');
 var v1DeliveryOrderByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-by-user-router');
@@ -49,10 +49,11 @@ var v1InvoiceNoteVatPdfRouter = require('../src/routers/v1/invoice-note/invoice-
 var v1InvoiceNoteIncomeTaxPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-income-tax-pdf-router');
 var v1InvoiceNoteByUserRouter = require('../src/routers/v1/invoice-note/invoice-note-by-user-router');
 var v1InvoiceNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-router');
+var v1InvoiceNoteNoInternNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-no-intern-note-router');
 
 // UNIT RECEIPT NOTE
 // var v1UnitReceiptNoteMonitoringByUserRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-by-user-router');
-// var v1UnitReceiptNoteMonitoringRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-router');
+var v1UnitReceiptNoteMonitoringRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-router');
 // var v1UnitReceiptWithoutSpbRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-without-spb-router');
 var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-by-user-router');
 // var v1UnitPaymentOrderSupplierRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-suplier-unit-router');
@@ -61,6 +62,16 @@ var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-
 //garment-currency
 var v1GarmentCurrency = require('../src/routers/v1/garment-currency/garment-currency-upload-router');
 var v1GarmentCurrencies = require('../src/routers/v1/garment-currency/garment-currency-router');
+
+// INTERN NOTE
+var v1InternNoteByUserRouter = require('../src/routers/v1/intern-note/intern-note-by-user-router');
+var v1InternNoteRouter = require('../src/routers/v1/intern-note/intern-note-router');
+
+// PURCHASE CORRECTION
+var v1PurchaseQuantityCorrectionByUserRouter = require("../src/routers/v1/purchase-correction/purchase-quantity-correction-by-user-router");
+var v1PurchasePriceCorrectionRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-router');
+var v1PurchasePriceCorrectionByUserRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-by-user-router');
+
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -100,8 +111,8 @@ module.exports = function (server) {
     v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/v1/etl-garment-purchase-requests");
 
     //DELIVERY ORDER
-    // v1DOMonitoringByUserRouter().applyRoutes(server,                        "/v1/delivery-orders/monitoring/by-user");
-    // v1DOMonitoringRouter().applyRoutes(server,                              "/v1/delivery-orders/monitoring");
+    //v1DOMonitoringByUserRouter().applyRoutes(server,                        "/v1/delivery-orders/monitoring/by-user");
+    v1DOMonitoringRouter().applyRoutes(server,    "/v1/delivery-orders/monitoring");
     v1DeliveryOrderBySupplierRouter().applyRoutes(server, "/v1/delivery-orders/by-supplier");
     v1DeliveryOrderNoInvoiceRouter().applyRoutes(server, "/v1/delivery-orders/no-invoice");
     v1DeliveryOrderByUserRouter().applyRoutes(server, "/v1/delivery-orders/by-user");
@@ -115,18 +126,29 @@ module.exports = function (server) {
     v1InvoiceNoteIncomeTaxPdfRouter().applyRoutes(server, "/v1/invoice-notes/pdf/income-tax");
     v1InvoiceNoteVatPdfRouter().applyRoutes(server, "/v1/invoice-notes/pdf/vat");
     v1InvoiceNoteByUserRouter().applyRoutes(server, "/v1/invoice-notes/by-user");
+    v1InvoiceNoteNoInternNoteRouter().applyRoutes(server, "/v1/invoice-notes/no-intern-note");
     v1InvoiceNoteRouter().applyRoutes(server, "/v1/invoice-notes");
 
     //UNIT RECEIPT NOTE
     // v1UnitReceiptNoteMonitoringByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring/by-user");
-    // v1UnitReceiptNoteMonitoringRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring");
+     v1UnitReceiptNoteMonitoringRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring");
     // v1UnitReceiptWithoutSpbRouter().applyRoutes(server, "/v1/unit-receipt-without-spb");
     v1UnitReceiptNoteByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-user");
     // v1UnitPaymentOrderSupplierRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-supplier-unit");
     v1UnitReceiptNoteRouter().applyRoutes(server, "/v1/unit-receipt-notes");
 
+
     //garment currency
     v1GarmentCurrency().applyRoutes(server,"/v1/garment-currency");
     v1GarmentCurrencies().applyRoutes(server,"/v1/garment-currencies");
+
+    //INTERN NOTE
+    v1InternNoteByUserRouter().applyRoutes(server, "/v1/intern-notes/by-user");
+    v1InternNoteRouter().applyRoutes(server, "/v1/intern-notes");
+
+    //PURCHASE CORRECTION
+    v1PurchaseQuantityCorrectionByUserRouter().applyRoutes(server, "/v1/purchase-quantity-correction/by-user");
+    v1PurchasePriceCorrectionByUserRouter().applyRoutes(server, "/v1/purchase-price-corrections/by-user");
+    v1PurchasePriceCorrectionRouter().applyRoutes(server, "/v1/purchase-price-corrections");
 
 };

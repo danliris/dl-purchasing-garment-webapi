@@ -15,13 +15,14 @@ function getRouter() {
             var PRNo = request.params.PRNo;
             var unitId = request.params.unitId;
             var categoryId = request.params.categoryId;
+            var buyerId = request.params.buyerId;
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
             var state = parseInt(request.params.state);
             var createdBy = request.user.username;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-            manager.getDataPRMonitoring(unitId, categoryId, PRNo, dateFrom, dateTo, state, offset, createdBy)
+            manager.getDataPRMonitoring(unitId, categoryId,buyerId, PRNo, dateFrom, dateTo, state, offset, createdBy)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
@@ -37,34 +38,32 @@ function getRouter() {
                         var data = [];
                         var index = 0;
                         for (var purchaseRequest of docs) {
-                            for (var item of purchaseRequest.items) {
                                 index++;
                                 var status = purchaseRequest.status ? purchaseRequest.status.label : "-";
 
                                 if (purchaseRequest.status.value === 4 || purchaseRequest.status.value === 9) {
-                                    status = item.deliveryOrderNos.length > 0 ? `${status} (${item.deliveryOrderNos.join(", ")})` : status;
+                                    status = purchaseRequest.deliveryOrderNos.length > 0 ? `${status} (${purchaseRequest.deliveryOrderNos.join(", ")})` : status;
                                 }
                                 var _item = {
                                     "No": index,
-                                    "Unit": `${purchaseRequest.unit.division.name} - ${purchaseRequest.unit.name}`,
-                                    "Kategori": item.category.name,
-                                    "Tanggal PR": moment(new Date(purchaseRequest.date)).add(offset, 'h').format(dateFormat),
+                                    "Unit": `${purchaseRequest.division} - ${purchaseRequest.unit}`,
+                                    "Kategori": purchaseRequest.category,
+                                    "Tanggal PR": moment(new Date(purchaseRequest.prDate)).add(offset, 'h').format(dateFormat),
                                     "Tanggal Shipment": moment(new Date(purchaseRequest.shipmentDate)).add(offset, 'h').format(dateFormat),
                                     "Nomor RO": purchaseRequest.roNo,
-                                    "Buyer": purchaseRequest.buyer.name,
+                                    "Buyer": purchaseRequest.buyer,
                                     "Artikel": purchaseRequest.artikel,
-                                    "Nomor PR": purchaseRequest.no,
-                                    "Nomor Referensi PR": item.refNo,
-                                    "Kode Barang": item.product.code,
-                                    "Nama Barang": item.product.name,
-                                    "Jumlah": item.quantity,
-                                    "Satuan": item.product.uom.unit,
+                                    "Nomor PR": purchaseRequest.prNo,
+                                    "Nomor Referensi PR": purchaseRequest.refNo,
+                                    "Kode Barang": purchaseRequest.productCode,
+                                    "Nama Barang": purchaseRequest.productName,
+                                    "Jumlah": purchaseRequest.productQty,
+                                    "Satuan": purchaseRequest.productUom,
                                     //"Tanggal Diminta Datang": purchaseRequest.expectedDeliveryDate ? moment(new Date(purchaseRequest.expectedDeliveryDate)).add(offset, 'h').format(dateFormat) : "-",
-                                    "Keterangan": item.remark,
+                                    "Keterangan": purchaseRequest.remark,
                                     "Status": status
                                 }
                                 data.push(_item);
-                            }
                         }
 
                         var options = {
