@@ -49,6 +49,7 @@ var v1InvoiceNoteVatPdfRouter = require('../src/routers/v1/invoice-note/invoice-
 var v1InvoiceNoteIncomeTaxPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-income-tax-pdf-router');
 var v1InvoiceNoteByUserRouter = require('../src/routers/v1/invoice-note/invoice-note-by-user-router');
 var v1InvoiceNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-router');
+var v1InvoiceNoteMonitoringRouter= require('../src/routers/v1/invoice-note/invoice-note-monitoring-router');
 var v1InvoiceNoteNoInternNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-no-intern-note-router');
 
 // UNIT RECEIPT NOTE
@@ -124,6 +125,7 @@ module.exports = function (server) {
     v1InvoiceNoteByUserRouter().applyRoutes(server, "/v1/invoice-notes/by-user");
     v1InvoiceNoteNoInternNoteRouter().applyRoutes(server, "/v1/invoice-notes/no-intern-note");
     v1InvoiceNoteRouter().applyRoutes(server, "/v1/invoice-notes");
+    v1InvoiceNoteMonitoringRouter().applyRoutes(server, "/v1/invoice-notes-monitoring");
 
     //UNIT RECEIPT NOTE
     // v1UnitReceiptNoteMonitoringByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring/by-user");
