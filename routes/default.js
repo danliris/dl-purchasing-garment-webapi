@@ -72,6 +72,7 @@ var v1InternNoteRouter = require('../src/routers/v1/intern-note/intern-note-rout
 var v1PurchaseQuantityCorrectionByUserRouter = require("../src/routers/v1/purchase-correction/purchase-quantity-correction-by-user-router");
 var v1PurchasePriceCorrectionRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-router');
 var v1PurchasePriceCorrectionByUserRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-by-user-router');
+var v1PurchasePriceCorrectionMonitoringRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-monitoring-router');
 
 
 
@@ -152,6 +153,7 @@ module.exports = function (server) {
     v1PurchaseQuantityCorrectionByUserRouter().applyRoutes(server, "/purchase-quantity-correction/by-user");
     v1PurchasePriceCorrectionByUserRouter().applyRoutes(server, "/purchase-price-corrections/by-user");
     v1PurchasePriceCorrectionRouter().applyRoutes(server, "/purchase-price-corrections");
+    v1PurchasePriceCorrectionMonitoringRouter().applyRoutes(server, "/purchase-price-correction/monitoring");
 
 
 };
