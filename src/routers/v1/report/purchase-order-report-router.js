@@ -11,7 +11,12 @@ function getRouter() {
         version: apiVersion,
         defaultOrder: {
             "_updatedDate": -1
-        }
+        },
+        defaultFilter: (request, response, next) => {
+            return {
+                "_createdBy": request.user.username
+            };
+        },
     };
 
     var router = JwtRouterFactory(Manager, options);
@@ -27,7 +32,7 @@ function getRouter() {
             });
     };
 
-    router.get("/get/report", passport, function(request, response, next) {
+    router.get("/get/report", passport, function (request, response, next) {
         var user = request.user;
         var query = request.query;
         var rManager;
