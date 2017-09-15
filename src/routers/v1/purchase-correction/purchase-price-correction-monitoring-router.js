@@ -19,7 +19,9 @@ function getRouter() {
     router.get("/", passport, function (request, response, next) {
         var user = request.user;
         var query = request.query;
-     
+        var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
+       
+        query.offset=offset;
         var PurchasePriceCorrectionManager = {};
         getManager(user)
             .then((manager) => {
