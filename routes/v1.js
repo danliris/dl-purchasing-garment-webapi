@@ -67,6 +67,7 @@ var v1GarmentCurrencies = require('../src/routers/v1/garment-currency/garment-cu
 // INTERN NOTE
 var v1InternNoteByUserRouter = require('../src/routers/v1/intern-note/intern-note-by-user-router');
 var v1InternNoteRouter = require('../src/routers/v1/intern-note/intern-note-router');
+var v1InternNoteMonitoringRouter = require('../src/routers/v1/intern-note/intern-note-monitoring-router');
 
 // PURCHASE CORRECTION
 var v1PurchaseQuantityCorrectionByUserRouter = require("../src/routers/v1/purchase-correction/purchase-quantity-correction-by-user-router");
@@ -149,6 +150,7 @@ module.exports = function (server) {
     //INTERN NOTE
     v1InternNoteByUserRouter().applyRoutes(server, "/v1/intern-notes/by-user");
     v1InternNoteRouter().applyRoutes(server, "/v1/intern-notes");
+    v1InternNoteMonitoringRouter().applyRoutes(server, "/v1/intern-notes-monitoring");
 
     //PURCHASE CORRECTION
     v1PurchaseQuantityCorrectionByUserRouter().applyRoutes(server, "/v1/purchase-quantity-correction/by-user");
