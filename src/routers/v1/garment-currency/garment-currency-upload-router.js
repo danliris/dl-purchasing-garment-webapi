@@ -42,9 +42,9 @@ function getRouter() {
                                     var currency = [];
                                     for (var item of doc) {
                                         var _item = {
-                                            "code": item.code,
+                                            "Mata Uang": item["Mata Uang"],
 
-                                            "rate": item.rate,
+                                            "Kurs": item.Kurs,
 
                                             "Error": item.Error
                                         }
