@@ -1,6 +1,6 @@
 var Router = require('restify-router').Router;
 var db = require("../../../db");
-var DOManager = require("dl-module").managers.garmentPurchasing.DeliveryOrderManager;
+var InternNoteManager = require("dl-module").managers.garmentPurchasing.InternNoteManager;
 var resultFormatter = require("../../../result-formatter");
 
 var passport = require('../../../passports/jwt-passport');
@@ -11,7 +11,7 @@ function getRouter() {
     var getManager = (user) => {
         return db.get()
             .then((db) => {
-                return Promise.resolve(new DOManager(db, user));
+                return Promise.resolve(new InternNoteManager(db, user));
             });
     };
 
@@ -21,12 +21,12 @@ function getRouter() {
         var query = request.query;
         query.user=user.username;
         var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
-        var doManager = {};
+        var internNoteManager = {};
         query.offset=offset;
         getManager(user)
             .then((manager) => {
-                doManager = manager;
-                return doManager.getMonitoringDO(query);
+                internNoteManager = manager;
+                return internNoteManager.getDataMonitoring(query);
             })
             .then(docs => {
                 var result = resultFormatter.ok(apiVersion, 200, docs);
@@ -37,7 +37,7 @@ function getRouter() {
                     response.send(result.statusCode, result);
                 }
                 else{
-                    doManager.getXls(result, query)
+                    internNoteManager.getXls(result, query)
                         .then(xls => {
                             response.xls(xls.name, xls.data, xls.options)
                         });

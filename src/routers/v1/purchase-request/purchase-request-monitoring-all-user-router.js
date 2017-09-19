@@ -52,7 +52,7 @@ function getRouter() {
                                     "Nomor RO": purchaseRequest.roNo,
                                     "Buyer": purchaseRequest.buyer,
                                     "Artikel": purchaseRequest.artikel,
-                                    "Nomor PR": purchaseRequest.no,
+                                    "Nomor PR": purchaseRequest.prNo,
                                     "Nomor Referensi PR": purchaseRequest.refNo,
                                     "Kode Barang": purchaseRequest.productCode,
                                     "Nama Barang": purchaseRequest.productName,

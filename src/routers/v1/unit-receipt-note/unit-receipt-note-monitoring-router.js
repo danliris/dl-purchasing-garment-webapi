@@ -24,7 +24,7 @@ function getRouter() {
         getManager(user)
             .then((manager) => {
                 UnitReceiptManager = manager;
-                return UnitReceiptManager.getUnitReceiptReport(query);
+                return UnitReceiptManager.getUnitReceiptReport(query,user);
             })
             .then(docs => {
                 var result = resultFormatter.ok(apiVersion, 200, docs);
