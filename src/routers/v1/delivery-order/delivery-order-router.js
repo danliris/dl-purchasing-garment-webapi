@@ -6,7 +6,7 @@ function getRouter() {
     var router = JwtRouterFactory(Manager, {
         version: apiVersion,
         defaultOrder: {
-            "_updatedDate": -1
+            "_createdDate": -1
         },
         defaultSelect:["no","supplierDoDate","supplier.name","items.purchaseOrderExternalNo"]
     });

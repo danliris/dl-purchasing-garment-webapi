@@ -36,7 +36,7 @@ function getRouter() {
     var router = JwtRouterFactory(Manager, {
         version: apiVersion,
         defaultOrder: {
-            "_updatedDate": -1
+            "_createdDate": -1
         },
         defaultFilter: (request, response, next) => {
             return {

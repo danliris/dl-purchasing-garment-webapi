@@ -29,7 +29,7 @@ function getJWTRouter() {
         var query = request.query;
 
         query.filter = Object.assign({}, query.filter, typeof defaultFilter === "function" ? defaultFilter(request, response, next) : defaultFilter, query.filter, { "_createdBy": request.user.username });
-        query.order = Object.assign({}, query.order, typeof defaultOrder === "function" ? defaultOrder(request, response, next) : defaultOrder, query.order);
+        query.order = Object.assign({}, query.order, typeof defaultOrder === "function" ? defaultOrder(request, response, next) : defaultOrder, query.order, {"_createdDate": -1});
         query.select = query.select ? query.select : ["no","buyer.name", "purchaseRequest.refNo", "purchaseRequest.shipmentDate", "purchaseRequest.no", "purchaseRequest.roNo", "_createdBy", "purchaseOrderExternal.isPosted", "isPosted"];
 
         if(query.order.quantity){
