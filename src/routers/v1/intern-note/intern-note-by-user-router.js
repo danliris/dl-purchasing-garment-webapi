@@ -39,6 +39,9 @@ var handlePdfRequest = function (request, response, next) {
 function getRouter() {
     var router = JwtRouterFactory(Manager, {
         version: apiVersion,
+        defaultOrder: {
+            "_createdDate": -1
+        },
         defaultFilter: (request, response, next) => {
             return {
                 "_createdBy": request.user.username
