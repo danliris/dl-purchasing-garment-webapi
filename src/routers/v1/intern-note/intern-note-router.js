@@ -39,7 +39,10 @@ var handlePdfRequest = function (request, response, next) {
 
 function getRouter() {
     var router = JwtRouterFactory(Manager, {
-        version: apiVersion
+        version: apiVersion,
+        defaultOrder: {
+            "_createdDate": -1
+        }
     });
 
     var route = router.routes["get"].find(route => route.options.path === "/:id");
