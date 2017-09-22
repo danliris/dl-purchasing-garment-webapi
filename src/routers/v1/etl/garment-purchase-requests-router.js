@@ -26,9 +26,10 @@ function getRouter() {
         var data = request.body;
 
         var tables = data.tables.split("&");
-        // var date = data.tables2;
+        var o = [data.date.trim()];
         var table1 = tables[0].trim();
         var table2 = tables[1].trim();
+        var date = o[0];
 
         Promise.all([db, sqlConnect])
             .then((result) => {
@@ -38,7 +39,8 @@ function getRouter() {
                     var manager = new Manager(db, {
                         username: "unit-test"
                     }, sql);
-                    manager.run(table1, table2)
+                    manager.run(date, table1, table2)
+                        // manager.run(o)
                         .then(data => {
                             var result = resultFormatter.ok(apiVersion, 200, data);
                             response.send(200, result);
