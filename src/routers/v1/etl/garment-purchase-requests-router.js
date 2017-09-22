@@ -40,7 +40,6 @@ function getRouter() {
                         username: "unit-test"
                     }, sql);
                     manager.run(date, table1, table2)
-                        // manager.run(o)
                         .then(data => {
                             var result = resultFormatter.ok(apiVersion, 200, data);
                             response.send(200, result);

@@ -38,6 +38,9 @@ function getRouter() {
                 "items.isClosed",
                 "items.purchaseOrderExternalId",
                 "items.purchaseOrderExternalNo",
+                "items.paymentDueDays",
+                "items.paymentType",
+                "items.paymentMethod",
                 "items.fulfillments.purchaseOrderQuantity",
                 "items.fulfillments.purchaseOrderUom._id",
                 "items.fulfillments.purchaseOrderUom.unit",
@@ -52,6 +55,9 @@ function getRouter() {
                 "items.fulfillments.purchaseRequestId",
                 "items.fulfillments.purchaseRequestNo",
                 "items.fulfillments.pricePerDealUnit",
+                "items.fulfillments.quantityConversion",
+                "items.fulfillments.uomConversion",
+                "items.fulfillments.conversion",
                 "items.fulfillments.currency"
             ];
 
