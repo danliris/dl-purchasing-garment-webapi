@@ -22,6 +22,8 @@ function getRouter() {
     router.post('/migrate/file', passport, (request, response, next) => {
         request.connection.setTimeout(120 * 60000);
 
+        request.connection._server.timeout = (120 * 60000);
+
         var user = request.user;
         var data = request.body;
 
