@@ -19,6 +19,7 @@ var v1PurchaseOrderByUserRouter = require('../src/routers/v1/purchase-order/purc
 // var v1ReportPoSubUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-unit-router');
 var v1PurchaseOrderRouter = require('../src/routers/v1/purchase-order/purchase-order-router');
 var v1PurchaseOrderReportRouter = require('../src/routers/v1/report/purchase-order-report-router');
+var v1PurchaseOrderMonitoringReportRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-report-router');
 
 // PURCHASE ORDER EXTERNAL
 var v1PurchaseOrderExternalPostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-post-router');
@@ -87,6 +88,7 @@ module.exports = function (server) {
     v1PurchaseRequestRouter().applyRoutes(server, "/purchase-requests");
 
     //PURCHASE ORDER
+    v1PurchaseOrderMonitoringReportRouter().applyRoutes(server, "/purchase-orders/report/monitoring-purchase");
     v1PurchaseOrderByTagsRouter().applyRoutes(server, "/purchase-orders/by-tags");
     v1PurchaseOrderSplitRouter().applyRoutes(server, "/purchase-orders/split");
     // v1POMonitoringByUserRouter().applyRoutes(server,                        "/purchase-orders/monitoring/by-user");
