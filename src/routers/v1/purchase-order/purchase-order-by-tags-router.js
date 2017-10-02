@@ -14,10 +14,11 @@ function getRouter() {
             var keyword = request.query.filter.tag;
             var shipmentDateFrom = request.query.filter.shipmentDateFrom;
             var shipmentDateTo = request.query.filter.shipmentDateTo;
-            var categoryId = request.query.filter.categoryId;
+            // var categoryId = request.query.filter.categoryId;
             var user = request.user.username
 
-            manager.getPurchaseOrderByTag(user, categoryId, keyword, shipmentDateFrom, shipmentDateTo)
+            // manager.getPurchaseOrderByTag(user, categoryId, keyword, shipmentDateFrom, shipmentDateTo)
+            manager.getPurchaseOrderByTag(user, keyword, shipmentDateFrom, shipmentDateTo)
                 .then(data => {
                     var result = resultFormatter.ok(apiVersion, 200, data);
                     response.send(200, result);
