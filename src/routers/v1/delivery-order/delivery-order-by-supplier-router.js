@@ -54,6 +54,7 @@ function getRouter() {
                 "items.fulfillments.purchaseOrderNo",
                 "items.fulfillments.purchaseRequestId",
                 "items.fulfillments.purchaseRequestNo",
+                "items.fulfillments.purchaseRequestRefNo",
                 "items.fulfillments.pricePerDealUnit",
                 "items.fulfillments.quantityConversion",
                 "items.fulfillments.uomConversion",

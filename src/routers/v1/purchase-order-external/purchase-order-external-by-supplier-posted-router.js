@@ -46,7 +46,10 @@ function getRouter() {
                 "items.dealUom",
                 "items.realizations",
                 "items.isClosed",
-                "items.useIncomeTax"
+                "items.useIncomeTax",
+                "items.quantityConversion",
+                "items.uomConversion",
+                "items.conversion"
             ];
 
             query.select = select;
