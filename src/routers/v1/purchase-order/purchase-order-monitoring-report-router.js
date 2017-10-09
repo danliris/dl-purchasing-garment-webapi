@@ -12,9 +12,12 @@ function getRouter() {
     router.get('/', passport, (request, response, next) => {
         db.get().then(db => {
             var manager = new Manager(db, request.user);
+            var user = request.user;
 
             var query = request.query;
             query = Object.assign(query, {
+                user: user,
+                state: parseInt(query.state),
                 offset: request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 7,
                 xls: (request.headers.accept || '').toString().indexOf("application/xls") > -1
             })
