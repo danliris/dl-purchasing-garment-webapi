@@ -16,7 +16,7 @@ function getRouter() {
 
             var query = request.query;
             query = Object.assign(query, {
-                user: user,
+                user: user.username,
                 state: parseInt(query.state),
                 offset: request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 7,
                 xls: (request.headers.accept || '').toString().indexOf("application/xls") > -1
