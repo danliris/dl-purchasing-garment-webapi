@@ -46,98 +46,14 @@ function getRouter() {
                     var manager = new Manager(db, {
                         username: "unit-test"
                     }, sql);
-
-                    var monthOpt = ["latest",
-                        "january", "february", "march",
-                        "april", "may", "june",
-                        "july", "august", "september",
-                        "october", "november", "december"];
-
-                    var tgl = monthOpt.indexOf(date);
-                    var tempYear = new Date().getFullYear().toString();
-                    var dateStamp;
-
-                    if (tgl == 1) {
-                        dateStamp = tempYear + "-01%%";
-                    } else if (tgl == 2) {
-                        dateStamp = tempYear + "-02%%";
-                    } else if (tgl == 3) {
-                        dateStamp = tempYear + "-03%%";
-                    } else if (tgl == 4) {
-                        dateStamp = tempYear + "-04%%";
-                    } else if (tgl == 5) {
-                        dateStamp = tempYear + "-05%%";
-                    } else if (tgl == 6) {
-                        dateStamp = tempYear + "-06%%";
-                    } else if (tgl == 7) {
-                        dateStamp = tempYear + "-07%%";
-                    } else if (tgl == 8) {
-                        dateStamp = tempYear + "-08%%";
-                    } else if (tgl == 9) {
-                        dateStamp = tempYear + "-09%%";
-                    } else if (tgl == 10) {
-                        dateStamp = tempYear + "-10%%";
-                    } else if (tgl == 11) {
-                        dateStamp = tempYear + "-11%%";
-                    } else if (tgl == 12) {
-                        dateStamp = tempYear + "-12%%";
-                    } else {
-
-                        manager.getTimeStamp().then((result) => {
-
-                            if (result.length != 0 && result[0].status == "Successful") {
-                                var year = result[0].start.getFullYear();
-                                var month = result[0].start.getMonth() + 1;
-                                var day = result[0].start.getDate();
-
-                                if (month < 10) {
-                                    month = "0" + month;
-                                } 5
-                                if (day < 10) {
-                                    day = "0" + day;
-                                }
-
-                                dateStamp = [year, month, day].join('-');
-                            } else {
-                                var year = new Date().getFullYear();
-                                var month = new Date().getMonth() + 1;
-                                var day = new Date().getDate();
-
-                                if (month < 10) {
-                                    month = "0" + month;
-                                }
-                                if (day < 10) {
-                                    day = "0" + day;
-                                }
-                                dateStamp = [year, month, day].join('-');
-                            }
-                            manager.extract(table1, table2, i, pageSize, dateStamp)
-                                .then((extracted) => {
-                                    manager.transform(extracted)
-                                        .then((transformed) => {
-                                            manager.load(transformed)
-                                                .then((result) => {
-                                                    var result = resultFormatter.ok(apiVersion, 200, result);
-                                                    response.send(200, result);
-                                                })
-                                                .catch(e => {
-                                                    response.send(500, "gagal");
-                                                });
-                                        })
-                                })
-                                .catch(e => {
-                                    response.send(500, "gagal");
-                                });
+                    manager.run(date, table1, table2, i, pageSize)
+                        .then(data => {
+                            var result = resultFormatter.ok(apiVersion, 200, data);
+                            response.send(200, result);
                         })
-                    }
-                    // manager.run(date, table1, table2)
-                    //     .then(data => {
-                    //         var result = resultFormatter.ok(apiVersion, 200, data);
-                    //         response.send(200, result);
-                    //     })
-                    //     .catch(e => {
-                    //         response.send(500, "gagal");
-                    //     });
+                        .catch(e => {
+                            response.send(500, "gagal");
+                        });
                 }).catch(e => {
                     var error = resultFormatter.fail(apiVersion, 400, e);
                     response.send(400, error);
@@ -200,7 +116,19 @@ function getRouter() {
                         dateStamp = tempYear + "-11%%";
                     } else if (tgl == 12) {
                         dateStamp = tempYear + "-12%%";
-                    } else {
+                    }
+
+                    if (dateStamp) {
+                        manager.getRowNumber(table1, table2, dateStamp)
+                            .then(data => {
+                                var result = resultFormatter.ok(apiVersion, 200, data);
+                                response.send(200, result);
+                            })
+                            .catch(e => {
+                                response.send(500, "gagal");
+                            });
+                    }
+                    else {
                         manager.getTimeStamp().then((result) => {
 
                             if (result.length != 0 && result[0].status == "Successful") {
@@ -239,7 +167,6 @@ function getRouter() {
                                 });
                         })
                     }
-
                 }).catch(e => {
                     var error = resultFormatter.fail(apiVersion, 400, e);
                     response.send(400, error);
