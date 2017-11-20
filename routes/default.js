@@ -29,6 +29,7 @@ var v1PurchaseOrderExternalCancelRouter = require('../src/routers/v1/purchase-or
 var v1PurchaseOrderExternalUnpostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-unpost-router');
 var v1PurchaseOrderExternalCloseRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-close-router');
 var v1PurchaseOrderExternalBySupplierRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-by-supplier-posted-router');
+var v1PurchaseOrderExternalGetBudgetRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-get-budget-router');
 
 //ETL
 var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-purchase-requests-router');
@@ -105,13 +106,14 @@ module.exports = function (server) {
     v1PurchaseOrderReportRouter().applyRoutes(server, "/purchase-orders-report")
 
     //PURCHASE ORDER EXTERNAL
-    v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/v1/purchase-orders/externals/post");
-    v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/v1/purchase-orders/externals/by-user");
-    v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/v1/purchase-orders/externals/cancel");
-    v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/v1/purchase-orders/externals/unpost");
-    v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/v1/purchase-orders/externals/close");
-    v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server, "/v1/purchase-orders/externals/by-supplier");
-    v1PurchaseOrderExternalRouter().applyRoutes(server, "/v1/purchase-orders/externals");
+    v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/purchase-orders/externals/post");
+    v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/purchase-orders/externals/by-user");
+    v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/purchase-orders/externals/cancel");
+    v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/purchase-orders/externals/unpost");
+    v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/purchase-orders/externals/close");
+    v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server, "/purchase-orders/externals/by-supplier");
+    v1PurchaseOrderExternalGetBudgetRouter().applyRoutes(server, "/purchase-orders/externals/get-budget");    
+    v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders/externals");
 
     //ETL
     v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/etl-garment-purchase-requests");
