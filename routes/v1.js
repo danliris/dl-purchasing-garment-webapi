@@ -29,6 +29,7 @@ var v1PurchaseOrderExternalCancelRouter = require('../src/routers/v1/purchase-or
 var v1PurchaseOrderExternalUnpostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-unpost-router');
 var v1PurchaseOrderExternalCloseRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-close-router');
 var v1PurchaseOrderExternalBySupplierRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-by-supplier-posted-router');
+var v1PurchaseOrderExternalGetBudgetRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-get-budget-router');
 
 //ETL
 var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-purchase-requests-router');
@@ -36,6 +37,7 @@ var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-p
 // DELIVERY ORDER
 // var v1DOMonitoringByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-by-user-router');
 var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
+var v1DOMonitoringAllRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-all-router');
 var v1DeliveryOrderBySupplierRouter = require('../src/routers/v1/delivery-order/delivery-order-by-supplier-router');
 var v1DeliveryOrderNoInvoiceRouter = require('../src/routers/v1/delivery-order/delivery-order-no-invoice-router');
 var v1DeliveryOrderByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-by-user-router');
@@ -105,20 +107,22 @@ module.exports = function (server) {
     v1PurchaseOrderReportRouter().applyRoutes(server, "/v1/purchase-orders-report");
 
     //PURCHASE ORDER EXTERNAL
-    v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/purchase-orders/externals/post");
-    v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/purchase-orders/externals/by-user");
-    v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/purchase-orders/externals/cancel");
-    v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/purchase-orders/externals/unpost");
-    v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/purchase-orders/externals/close");
-    v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server, "/purchase-orders/externals/by-supplier");
-    v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders/externals");
-
+    v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/v1/purchase-orders/externals/post");
+    v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/v1/purchase-orders/externals/by-user");
+    v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/v1/purchase-orders/externals/cancel");
+    v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/v1/purchase-orders/externals/unpost");
+    v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/v1/purchase-orders/externals/close");
+    v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server, "/v1/purchase-orders/externals/by-supplier");
+    v1PurchaseOrderExternalGetBudgetRouter().applyRoutes(server, "/v1/purchase-orders/externals/get-budget");
+    v1PurchaseOrderExternalRouter().applyRoutes(server, "/v1/purchase-orders/externals");
+    
     //ETL
     v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/v1/etl-garment-purchase-requests");
 
     //DELIVERY ORDER
     //v1DOMonitoringByUserRouter().applyRoutes(server,                        "/v1/delivery-orders/monitoring/by-user");
     v1DOMonitoringRouter().applyRoutes(server,    "/v1/delivery-orders/monitoring");
+    v1DOMonitoringAllRouter().applyRoutes(server,    "/v1/delivery-orders/delivery-order-monitoring-all-router");
     v1DeliveryOrderBySupplierRouter().applyRoutes(server, "/v1/delivery-orders/by-supplier");
     v1DeliveryOrderNoInvoiceRouter().applyRoutes(server, "/v1/delivery-orders/no-invoice");
     v1DeliveryOrderByUserRouter().applyRoutes(server, "/v1/delivery-orders/by-user");
