@@ -129,7 +129,8 @@ function getRouter() {
                             });
                     }
                     else {
-                        manager.getTimeStamp().then((result) => {
+                        var opt = table1;
+                        manager.getTimeStamp(opt).then((result) => {
 
                             if (result.length != 0 && result[0].status == "Successful") {
                                 var year = result[0].start.getFullYear();
