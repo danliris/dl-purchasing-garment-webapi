@@ -37,6 +37,7 @@ function getRouter() {
         var date = o[0];
         var i = data.i;
         var pageSize = data.pageSize;
+        var buyer = data.buyer ? data.buyer.code : null;
 
         Promise.all([db, sqlConnect])
             .then((result) => {
@@ -46,7 +47,7 @@ function getRouter() {
                     var manager = new Manager(db, {
                         username: "unit-test"
                     }, sql);
-                    manager.run(date, table1, table2, i, pageSize)
+                    manager.run(date, table1, table2, i, pageSize, buyer)
                         .then(data => {
                             var result = resultFormatter.ok(apiVersion, 200, data);
                             response.send(200, result);
@@ -72,6 +73,7 @@ function getRouter() {
         var table1 = tables[0].trim();
         var table2 = tables[1].trim();
         var date = o[0];
+        var buyer = data.buyer ? data.buyer.code : null;
 
         Promise.all([db, sqlConnect])
             .then((result) => {
@@ -119,7 +121,7 @@ function getRouter() {
                     }
 
                     if (dateStamp) {
-                        manager.getRowNumber(table1, table2, dateStamp)
+                        manager.getRowNumber(table1, table2, dateStamp, buyer)
                             .then(data => {
                                 var result = resultFormatter.ok(apiVersion, 200, data);
                                 response.send(200, result);
@@ -131,21 +133,35 @@ function getRouter() {
                     else {
                         var opt = table1;
                         manager.getTimeStamp(opt).then((result) => {
+                            if (!buyer) {
+                                if (result.length != 0 && result[0].status == "Successful") {
+                                    var year = result[0].start.getFullYear();
+                                    var month = result[0].start.getMonth() + 1;
+                                    var day = result[0].start.getDate();
 
-                            if (result.length != 0 && result[0].status == "Successful") {
-                                var year = result[0].start.getFullYear();
-                                var month = result[0].start.getMonth() + 1;
-                                var day = result[0].start.getDate();
+                                    if (month < 10) {
+                                        month = "0" + month;
+                                    }
+                                    if (day < 10) {
+                                        day = "0" + day;
+                                    }
 
-                                if (month < 10) {
-                                    month = "0" + month;
+                                    dateStamp = [year, month, day].join('-');
+                                } else {
+                                    var year = new Date().getFullYear();
+                                    var month = new Date().getMonth() + 1;
+                                    var day = new Date().getDate();
+
+                                    if (month < 10) {
+                                        month = "0" + month;
+                                    }
+                                    if (day < 10) {
+                                        day = "0" + day;
+                                    }
+                                    dateStamp = [year, month, day].join('-');
                                 }
-                                if (day < 10) {
-                                    day = "0" + day;
-                                }
-
-                                dateStamp = [year, month, day].join('-');
                             } else {
+
                                 var year = new Date().getFullYear();
                                 var month = new Date().getMonth() + 1;
                                 var day = new Date().getDate();
@@ -156,9 +172,12 @@ function getRouter() {
                                 if (day < 10) {
                                     day = "0" + day;
                                 }
-                                dateStamp = [year, month, day].join('-');
+                                dateStamp = [year, month+"%%"].join('-');
+
                             }
-                            manager.getRowNumber(table1, table2, dateStamp)
+
+
+                            manager.getRowNumber(table1, table2, dateStamp, buyer)
                                 .then(data => {
                                     var result = resultFormatter.ok(apiVersion, 200, data);
                                     response.send(200, result);
