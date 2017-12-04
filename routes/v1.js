@@ -8,21 +8,15 @@ var v1PurchaseRequestRouter = require('../src/routers/v1/purchase-request/purcha
 // PURCHASE ORDER
 var v1PurchaseOrderByTagsRouter = require('../src/routers/v1/purchase-order/purchase-order-by-tags-router');
 var v1PurchaseOrderSplitRouter = require('../src/routers/v1/purchase-order/purchase-order-split-router');
-// var v1POMonitoringByUserRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-by-user-router');
-// var v1POMonitoringRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-router');
-// var v1POMonitoringPriceRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-price-router');
-// var v1PurchaseOrderUnpostedRouter = require('../src/routers/v1/purchase-order/purchase-order-un-posted-router');
 var v1PurchaseOrderByUserRouter = require('../src/routers/v1/purchase-order/purchase-order-by-user-router');
-// var v1ReportPoCategoryPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-category-router');
-// var v1ReportPoUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-unit-router');
-// var v1ReportPoSubUnitCategoriesPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-unit-category-router');
-// var v1ReportPoSubUnitPeriodeRouter = require('../src/routers/v1/purchase-order/reports/purchase-order-report-sub-unit-router');
 var v1PurchaseOrderRouter = require('../src/routers/v1/purchase-order/purchase-order-router');
 var v1PurchaseOrderReportRouter = require('../src/routers/v1/report/purchase-order-report-router');
 var v1PurchaseOrderMonitoringReportRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-report-router');
 
 // PURCHASE ORDER EXTERNAL
 var v1PurchaseOrderExternalPostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-post-router');
+var v1PurchaseOrderExternalApproveRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-approve-router');
+var v1PurchaseOrderExternalNotApprovedRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-not-approved-router');
 var v1PurchaseOrderExternalByUserRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-by-user-router');
 var v1PurchaseOrderExternalRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-router');
 var v1PurchaseOrderExternalCancelRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-cancel-router');
@@ -35,7 +29,6 @@ var v1PurchaseOrderExternalGetBudgetRouter = require('../src/routers/v1/purchase
 var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-purchase-requests-router');
 
 // DELIVERY ORDER
-// var v1DOMonitoringByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-by-user-router');
 var v1DOMonitoringRouter = require('../src/routers/v1/delivery-order/delivery-order-monitoring-router');
 var v1DeliveryOrderBySupplierRouter = require('../src/routers/v1/delivery-order/delivery-order-by-supplier-router');
 var v1DeliveryOrderNoInvoiceRouter = require('../src/routers/v1/delivery-order/delivery-order-no-invoice-router');
@@ -55,11 +48,8 @@ var v1InvoiceNoteMonitoringRouter= require('../src/routers/v1/invoice-note/invoi
 var v1InvoiceNoteNoInternNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-no-intern-note-router');
 
 // UNIT RECEIPT NOTE
-// var v1UnitReceiptNoteMonitoringByUserRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-by-user-router');
 var v1UnitReceiptNoteMonitoringRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-router');
-// var v1UnitReceiptWithoutSpbRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-without-spb-router');
 var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-by-user-router');
-// var v1UnitPaymentOrderSupplierRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-suplier-unit-router');
 var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-router');
 
 //garment-currency
@@ -91,15 +81,7 @@ module.exports = function (server) {
     v1PurchaseOrderMonitoringReportRouter().applyRoutes(server, "/v1/purchase-orders/report/monitoring-purchase");
     v1PurchaseOrderByTagsRouter().applyRoutes(server, "/v1/purchase-orders/by-tags");
     v1PurchaseOrderSplitRouter().applyRoutes(server, "/v1/purchase-orders/split");
-    // v1POMonitoringByUserRouter().applyRoutes(server,                        "/v1/purchase-orders/monitoring/by-user");
-    // v1POMonitoringRouter().applyRoutes(server,                              "/v1/purchase-orders/monitoring");
-    // v1POMonitoringPriceRouter().applyRoutes(server,                         "/v1/purchase-orders/price");
-    // v1PurchaseOrderUnpostedRouter().applyRoutes(server,                     "/v1/purchase-orders/unposted");
     v1PurchaseOrderByUserRouter().applyRoutes(server, "/v1/purchase-orders/by-user");
-    // v1ReportPoCategoryPeriodeRouter().applyRoutes(server,                   "/v1/purchase-orders/reports/categories");
-    // v1ReportPoUnitPeriodeRouter().applyRoutes(server,                       "/v1/purchase-orders/reports/units");
-    // v1ReportPoSubUnitCategoriesPeriodeRouter().applyRoutes(server,          "/v1/purchase-orders/reports/units-categories");
-    // v1ReportPoSubUnitPeriodeRouter().applyRoutes(server,                    "/v1/purchase-orders/reports/subUnits");
     v1PurchaseOrderRouter().applyRoutes(server, "/v1/purchase-orders");
 
     //report
@@ -113,6 +95,8 @@ module.exports = function (server) {
     v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/v1/purchase-orders/externals/close");
     v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server, "/v1/purchase-orders/externals/by-supplier");
     v1PurchaseOrderExternalGetBudgetRouter().applyRoutes(server, "/v1/purchase-orders/externals/get-budget");
+    v1PurchaseOrderExternalApproveRouter().applyRoutes(server,"/v1/purchase-orders/externals/approve");
+    v1PurchaseOrderExternalNotApprovedRouter().applyRoutes(server,"/v1/purchase-orders/externals/not-approved");
     v1PurchaseOrderExternalRouter().applyRoutes(server, "/v1/purchase-orders/externals");
     
     //ETL
