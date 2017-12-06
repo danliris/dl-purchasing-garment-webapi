@@ -77,7 +77,8 @@ var v1BudgetDealDeliveryOrder = require('../src/routers/v1/generating-data/gener
 var v1BudgetDealCustoms = require('../src/routers/v1/generating-data/generating-data-customs-router');
 var v1BudgetDealInternNote = require('../src/routers/v1/generating-data/generating-data-intern-note-router');
 var v1BudgetDealInvoice = require('../src/routers/v1/generating-data/generating-data-invoice-router');
-var v1BudgetDealCorrectionNote = require('../src/routers/v1/generating-data/generating-data-correction-note-router');
+var v1BudgetDealPriceCorrectionNote = require('../src/routers/v1/generating-data/generating-data-correction-note-router');
+var v1BudgetDealQuantityCorrectionNote = require('../src/routers/v1/generating-data/generating-data-quantity-correction-note-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -166,6 +167,7 @@ module.exports = function (server) {
     v1BudgetDealCustoms().applyRoutes(server, "/v1/generating-data/customs");
     v1BudgetDealInternNote().applyRoutes(server, "/v1/generating-data/intern-note");
     v1BudgetDealInvoice().applyRoutes(server, "/v1/generating-data/invoice");
-    v1BudgetDealCorrectionNote().applyRoutes(server, "/v1/generating-data/correction-note");
+    v1BudgetDealPriceCorrectionNote().applyRoutes(server, "/v1/generating-data/correction-note");
+    v1BudgetDealQuantityCorrectionNote().applyRoutes(server, "/v1/generating-data/quantity-correction-note");
 
 };
