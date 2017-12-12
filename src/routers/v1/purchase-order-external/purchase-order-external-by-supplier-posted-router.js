@@ -24,6 +24,9 @@ function getRouter() {
                 status: {
                     '$ne': poStatusEnum.VOID
                 },
+                $or: [
+                    { isOverBudget: true, isApproved: true },
+                    { isOverBudget: false }],
                 supplierId: new ObjectId(query.filter.supplierId)
             };
 
