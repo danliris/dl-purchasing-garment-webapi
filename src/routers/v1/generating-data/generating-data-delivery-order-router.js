@@ -13,7 +13,7 @@ function getRouter() {
             var manager = new DeliveryOrderManager(db, request.user);
             var sdate = request.params.dateFrom;
             var edate = request.params.dateTo;
-             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
             
              manager.getAllData(sdate, edate, offset)
                 .then(docs => {

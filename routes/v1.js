@@ -47,7 +47,7 @@ var v1InvoiceNoteVatPdfRouter = require('../src/routers/v1/invoice-note/invoice-
 var v1InvoiceNoteIncomeTaxPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-income-tax-pdf-router');
 var v1InvoiceNoteByUserRouter = require('../src/routers/v1/invoice-note/invoice-note-by-user-router');
 var v1InvoiceNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-router');
-var v1InvoiceNoteMonitoringRouter= require('../src/routers/v1/invoice-note/invoice-note-monitoring-router');
+var v1InvoiceNoteMonitoringRouter = require('../src/routers/v1/invoice-note/invoice-note-monitoring-router');
 var v1InvoiceNoteNoInternNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-no-intern-note-router');
 
 // UNIT RECEIPT NOTE
@@ -70,6 +70,10 @@ var v1PurchasePriceCorrectionRouter = require('../src/routers/v1/purchase-correc
 var v1PurchasePriceCorrectionByUserRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-by-user-router');
 var v1PurchasePriceCorrectionMonitoringRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-monitoring-router');
 var v1PurchaseQuantityCorrectionMonitoringRouter = require('../src/routers/v1/purchase-correction/purchase-quantity-correction-monitoring-router');
+var v1PurchasePriceCorrectionReturnNotePphRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-return-note-pph-router');
+var v1PurchasePriceCorrectionReturnNotePpnRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-return-note-ppn-router');
+var v1PurchaseQuantityCorrectionReturnNotePphRouter = require('../src/routers/v1/purchase-correction/purchase-quantity-correction-return-note-pph-router');
+var v1PurchaseQuantityCorrectionReturnNotePpnRouter = require('../src/routers/v1/purchase-correction/purchase-quantity-correction-return-note-ppn-router');
 
 // GENERATE DATA
 var v1BudgetDealPurchaseOrderExternal = require('../src/routers/v1/generating-data/generating-data-purchase-order-external-router');
@@ -77,7 +81,9 @@ var v1BudgetDealDeliveryOrder = require('../src/routers/v1/generating-data/gener
 var v1BudgetDealCustoms = require('../src/routers/v1/generating-data/generating-data-customs-router');
 var v1BudgetDealInternNote = require('../src/routers/v1/generating-data/generating-data-intern-note-router');
 var v1BudgetDealInvoice = require('../src/routers/v1/generating-data/generating-data-invoice-router');
-var v1BudgetDealCorrectionNote = require('../src/routers/v1/generating-data/generating-data-correction-note-router');
+var v1BudgetDealPriceCorrectionNote = require('../src/routers/v1/generating-data/generating-data-correction-note-router');
+var v1BudgetDealQuantityCorrectionNote = require('../src/routers/v1/generating-data/generating-data-quantity-correction-note-router');
+
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -106,16 +112,17 @@ module.exports = function (server) {
     v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/v1/purchase-orders/externals/close");
     v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server, "/v1/purchase-orders/externals/by-supplier");
     v1PurchaseOrderExternalGetBudgetRouter().applyRoutes(server, "/v1/purchase-orders/externals/get-budget");
-    v1PurchaseOrderExternalApproveRouter().applyRoutes(server,"/v1/purchase-orders/externals/approve");
-    v1PurchaseOrderExternalNotApprovedRouter().applyRoutes(server,"/v1/purchase-orders/externals/not-approved");
-    v1PurchaseOrderExternalOverBudgetReportRouter().applyRoutes(server,"/v1/purchase-orders/externals/report/over-budget");
+    v1PurchaseOrderExternalApproveRouter().applyRoutes(server, "/v1/purchase-orders/externals/approve");
+    v1PurchaseOrderExternalNotApprovedRouter().applyRoutes(server, "/v1/purchase-orders/externals/not-approved");
+    v1PurchaseOrderExternalOverBudgetReportRouter().applyRoutes(server, "/v1/purchase-orders/externals/report/over-budget");
     v1PurchaseOrderExternalRouter().applyRoutes(server, "/v1/purchase-orders/externals");
-    
+
     //ETL
     v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/v1/etl-garment-purchase-requests");
 
     //DELIVERY ORDER
     //v1DOMonitoringByUserRouter().applyRoutes(server,                        "/v1/delivery-orders/monitoring/by-user");
+
     v1DOMonitoringRouter().applyRoutes(server,    "/v1/delivery-orders/monitoring");
     v1DOMonitoringAllRouter().applyRoutes(server,    "/v1/delivery-orders/delivery-order-monitoring-all-router");
     v1DeliveryOrderBySupplierRouter().applyRoutes(server, "/v1/delivery-orders/by-supplier");
@@ -137,7 +144,7 @@ module.exports = function (server) {
 
     //UNIT RECEIPT NOTE
     // v1UnitReceiptNoteMonitoringByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring/by-user");
-     v1UnitReceiptNoteMonitoringRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring");
+    v1UnitReceiptNoteMonitoringRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring");
     // v1UnitReceiptWithoutSpbRouter().applyRoutes(server, "/v1/unit-receipt-without-spb");
     v1UnitReceiptNoteByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-user");
     // v1UnitPaymentOrderSupplierRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-supplier-unit");
@@ -145,8 +152,8 @@ module.exports = function (server) {
 
 
     //garment currency
-    v1GarmentCurrency().applyRoutes(server,"/v1/garment-currency");
-    v1GarmentCurrencies().applyRoutes(server,"/v1/garment-currencies");
+    v1GarmentCurrency().applyRoutes(server, "/v1/garment-currency");
+    v1GarmentCurrencies().applyRoutes(server, "/v1/garment-currencies");
 
     //INTERN NOTE
     v1InternNoteByUserRouter().applyRoutes(server, "/v1/intern-notes/by-user");
@@ -156,6 +163,10 @@ module.exports = function (server) {
     //PURCHASE CORRECTION
     v1PurchaseQuantityCorrectionByUserRouter().applyRoutes(server, "/v1/purchase-quantity-correction/by-user");
     v1PurchasePriceCorrectionByUserRouter().applyRoutes(server, "/v1/purchase-price-corrections/by-user");
+    v1PurchasePriceCorrectionReturnNotePphRouter().applyRoutes(server, "/v1/purchase-price-corrections/return-note/pph");
+    v1PurchasePriceCorrectionReturnNotePpnRouter().applyRoutes(server, "/v1/purchase-price-corrections/return-note/ppn");
+    v1PurchaseQuantityCorrectionReturnNotePphRouter().applyRoutes(server, "/v1/purchase-quantity-corrections/return-note/pph");
+    v1PurchaseQuantityCorrectionReturnNotePpnRouter().applyRoutes(server, "/v1/purchase-quantity-corrections/return-note/ppn");
     v1PurchasePriceCorrectionRouter().applyRoutes(server, "/v1/purchase-price-corrections");
     v1PurchasePriceCorrectionMonitoringRouter().applyRoutes(server, "/v1/purchase-price-correction/monitoring");
     v1PurchaseQuantityCorrectionMonitoringRouter().applyRoutes(server, "/v1/purchase-quantity-correction/monitoring");
@@ -166,6 +177,7 @@ module.exports = function (server) {
     v1BudgetDealCustoms().applyRoutes(server, "/v1/generating-data/customs");
     v1BudgetDealInternNote().applyRoutes(server, "/v1/generating-data/intern-note");
     v1BudgetDealInvoice().applyRoutes(server, "/v1/generating-data/invoice");
-    v1BudgetDealCorrectionNote().applyRoutes(server, "/v1/generating-data/correction-note");
+    v1BudgetDealPriceCorrectionNote().applyRoutes(server, "/v1/generating-data/correction-note");
+    v1BudgetDealQuantityCorrectionNote().applyRoutes(server, "/v1/generating-data/quantity-correction-note");
 
 };
