@@ -121,7 +121,7 @@ module.exports = function (server) {
     v1PurchaseOrderExternalGetBudgetRouter().applyRoutes(server, "/purchase-orders/externals/get-budget");
     v1PurchaseOrderExternalApproveRouter().applyRoutes(server, "/purchase-orders/externals/approve");
     v1PurchaseOrderExternalNotApprovedRouter().applyRoutes(server, "/purchase-orders/externals/not-approved");
-    v1PurchaseOrderExternalOverBudgetReportRouter().applyRoutes(server, "/v1/purchase-orders/externals/report/over-budget");
+    v1PurchaseOrderExternalOverBudgetReportRouter().applyRoutes(server, "/purchase-orders/externals/report/over-budget");
     v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders/externals");
 
     //ETL
