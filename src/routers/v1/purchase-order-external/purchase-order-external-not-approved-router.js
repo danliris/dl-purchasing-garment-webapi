@@ -19,43 +19,15 @@ function getRouter() {
 
             var filter = {
                 _deleted: false,
-                isPosted: true,
-                isClosed: false,
+                isOverBudget: true,
+                isPosted:true,
                 status: {
                     '$ne': poStatusEnum.VOID
-                },
-                $or: [
-                    { isOverBudget: true, isApproved: true },
-                    { isOverBudget: false }],
-                supplierId: new ObjectId(query.filter.supplierId)
+                }
             };
 
             query.filter = filter;
-
-            var select = [
-                "_id",
-                "no",
-                "items.poNo",
-                "items.poId",
-                "items.prNo",
-                "items.prId",
-                "items.prRefNo",
-                "items.roNo",
-                "items.productId",
-                "items.product",
-                "items.defaultQuantity",
-                "items.defaultUom",
-                "items.dealQuantity",
-                "items.dealUom",
-                "items.realizations",
-                "items.isClosed",
-                "items.useIncomeTax",
-                "items.quantityConversion",
-                "items.uomConversion",
-                "items.conversion"
-            ];
-
-            query.select = select;
+            query.select = query.select ? query.select : ["date", "no", "supplier.name", "items.prNo", "isPosted", "isApproved", "isOverBudget"];
 
             manager.read(query)
                 .then(docs => {

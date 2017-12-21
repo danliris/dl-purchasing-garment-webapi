@@ -23,6 +23,8 @@ var v1PurchaseOrderMonitoringReportRouter = require('../src/routers/v1/purchase-
 
 // PURCHASE ORDER EXTERNAL
 var v1PurchaseOrderExternalPostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-post-router');
+var v1PurchaseOrderExternalApproveRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-approve-router');
+var v1PurchaseOrderExternalNotApprovedRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-not-approved-router');
 var v1PurchaseOrderExternalByUserRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-by-user-router');
 var v1PurchaseOrderExternalRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-router');
 var v1PurchaseOrderExternalCancelRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-cancel-router');
@@ -30,6 +32,7 @@ var v1PurchaseOrderExternalUnpostRouter = require('../src/routers/v1/purchase-or
 var v1PurchaseOrderExternalCloseRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-close-router');
 var v1PurchaseOrderExternalBySupplierRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-by-supplier-posted-router');
 var v1PurchaseOrderExternalGetBudgetRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-get-budget-router');
+var v1PurchaseOrderExternalOverBudgetReportRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-monitoring-report-router');
 
 //ETL
 var v1ETLGarmentPurchaseRequestRouter = require('../src/routers/v1/etl/garment-purchase-requests-router');
@@ -51,7 +54,7 @@ var v1InvoiceNoteVatPdfRouter = require('../src/routers/v1/invoice-note/invoice-
 var v1InvoiceNoteIncomeTaxPdfRouter = require('../src/routers/v1/invoice-note/invoice-note-income-tax-pdf-router');
 var v1InvoiceNoteByUserRouter = require('../src/routers/v1/invoice-note/invoice-note-by-user-router');
 var v1InvoiceNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-router');
-var v1InvoiceNoteMonitoringRouter= require('../src/routers/v1/invoice-note/invoice-note-monitoring-router');
+var v1InvoiceNoteMonitoringRouter = require('../src/routers/v1/invoice-note/invoice-note-monitoring-router');
 var v1InvoiceNoteNoInternNoteRouter = require('../src/routers/v1/invoice-note/invoice-note-no-intern-note-router');
 
 // UNIT RECEIPT NOTE
@@ -69,7 +72,7 @@ var v1GarmentCurrenciesRouter = require('../src/routers/v1/garment-currency/garm
 // INTERN NOTE
 var v1InternNoteByUserRouter = require('../src/routers/v1/intern-note/intern-note-by-user-router');
 var v1InternNoteRouter = require('../src/routers/v1/intern-note/intern-note-router');
-var v1InternNoteMonitoringRouter= require('../src/routers/v1/intern-note/intern-note-monitoring-router');
+var v1InternNoteMonitoringRouter = require('../src/routers/v1/intern-note/intern-note-monitoring-router');
 
 // PURCHASE CORRECTION
 var v1PurchaseQuantityCorrectionByUserRouter = require("../src/routers/v1/purchase-correction/purchase-quantity-correction-by-user-router");
@@ -77,8 +80,10 @@ var v1PurchasePriceCorrectionRouter = require('../src/routers/v1/purchase-correc
 var v1PurchasePriceCorrectionByUserRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-by-user-router');
 var v1PurchasePriceCorrectionMonitoringRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-monitoring-router');
 var v1PurchaseQuantityCorrectionMonitoringRouter = require('../src/routers/v1/purchase-correction/purchase-quantity-correction-monitoring-router');
-
-
+var v1PurchasePriceCorrectionReturnNotePphRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-return-note-pph-router');
+var v1PurchasePriceCorrectionReturnNotePpnRouter = require('../src/routers/v1/purchase-correction/purchase-price-correction-return-note-ppn-router');
+var v1PurchaseQuantityCorrectionReturnNotePphRouter = require('../src/routers/v1/purchase-correction/purchase-quantity-correction-return-note-pph-router');
+var v1PurchaseQuantityCorrectionReturnNotePpnRouter = require('../src/routers/v1/purchase-correction/purchase-quantity-correction-return-note-ppn-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -107,20 +112,24 @@ module.exports = function (server) {
 
     //PURCHASE ORDER EXTERNAL
     v1PurchaseOrderExternalPostRouter().applyRoutes(server, "/purchase-orders/externals/post");
+    v1PurchaseOrderExternalApproveRouter().applyRoutes(server, "/purchase-orders/externals/approve");
     v1PurchaseOrderExternalByUserRouter().applyRoutes(server, "/purchase-orders/externals/by-user");
     v1PurchaseOrderExternalCancelRouter().applyRoutes(server, "/purchase-orders/externals/cancel");
     v1PurchaseOrderExternalUnpostRouter().applyRoutes(server, "/purchase-orders/externals/unpost");
     v1PurchaseOrderExternalCloseRouter().applyRoutes(server, "/purchase-orders/externals/close");
     v1PurchaseOrderExternalBySupplierRouter().applyRoutes(server, "/purchase-orders/externals/by-supplier");
-    v1PurchaseOrderExternalGetBudgetRouter().applyRoutes(server, "/purchase-orders/externals/get-budget");    
-    v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders/externals");
+    v1PurchaseOrderExternalGetBudgetRouter().applyRoutes(server, "/purchase-orders/externals/get-budget");
+    v1PurchaseOrderExternalApproveRouter().applyRoutes(server, "/purchase-orders/externals/approve");
+    v1PurchaseOrderExternalNotApprovedRouter().applyRoutes(server, "/purchase-orders/externals/not-approved");
+    v1PurchaseOrderExternalOverBudgetReportRouter().applyRoutes(server, "/purchase-orders/externals/report/over-budget");
+    v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders-externals");
 
     //ETL
     v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/etl-garment-purchase-requests");
 
     //DELIVERY ORDER
     // v1DOMonitoringByUserRouter().applyRoutes(server,                        "/delivery-orders/monitoring/by-user");
-    v1DOMonitoringRouter().applyRoutes(server,     "/delivery-orders/monitoring");
+    v1DOMonitoringRouter().applyRoutes(server, "/delivery-orders/monitoring");
     v1DeliveryOrderBySupplierRouter().applyRoutes(server, "/delivery-orders/by-supplier");
     v1DeliveryOrderNoInvoiceRouter().applyRoutes(server, "/delivery-orders/no-invoice");
     v1DeliveryOrderByUserRouter().applyRoutes(server, "/delivery-orders/by-user");
@@ -159,6 +168,10 @@ module.exports = function (server) {
     //PURCHASE CORRECTION
     v1PurchaseQuantityCorrectionByUserRouter().applyRoutes(server, "/purchase-quantity-correction/by-user");
     v1PurchasePriceCorrectionByUserRouter().applyRoutes(server, "/purchase-price-corrections/by-user");
+    v1PurchasePriceCorrectionReturnNotePphRouter().applyRoutes(server, "/purchase-price-corrections/return-note/pph");
+    v1PurchasePriceCorrectionReturnNotePpnRouter().applyRoutes(server, "/purchase-price-corrections/return-note/ppn");
+    v1PurchaseQuantityCorrectionReturnNotePphRouter().applyRoutes(server, "/purchase-quantity-corrections/return-note/pph");
+    v1PurchaseQuantityCorrectionReturnNotePpnRouter().applyRoutes(server, "/purchase-quantity-corrections/return-note/ppn");
     v1PurchasePriceCorrectionRouter().applyRoutes(server, "/purchase-price-corrections");
     v1PurchasePriceCorrectionMonitoringRouter().applyRoutes(server, "/purchase-price-correction/monitoring");
     v1PurchaseQuantityCorrectionMonitoringRouter().applyRoutes(server, "/purchase-quantity-correction/monitoring");
