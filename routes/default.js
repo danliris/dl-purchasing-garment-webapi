@@ -122,7 +122,7 @@ module.exports = function (server) {
     v1PurchaseOrderExternalApproveRouter().applyRoutes(server, "/purchase-orders/externals/approve");
     v1PurchaseOrderExternalNotApprovedRouter().applyRoutes(server, "/purchase-orders/externals/not-approved");
     v1PurchaseOrderExternalOverBudgetReportRouter().applyRoutes(server, "/purchase-orders/externals/report/over-budget");
-    v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders/externals");
+    v1PurchaseOrderExternalRouter().applyRoutes(server, "/purchase-orders-externals");
 
     //ETL
     v1ETLGarmentPurchaseRequestRouter().applyRoutes(server, "/etl-garment-purchase-requests");
