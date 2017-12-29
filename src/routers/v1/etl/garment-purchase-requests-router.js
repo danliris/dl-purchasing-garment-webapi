@@ -38,6 +38,7 @@ function getRouter() {
         var i = data.i;
         var pageSize = data.pageSize;
         var buyer = data.buyer ? data.buyer.code : null;
+        var year = data.year;
 
         Promise.all([db, sqlConnect])
             .then((result) => {
@@ -47,7 +48,7 @@ function getRouter() {
                     var manager = new Manager(db, {
                         username: "unit-test"
                     }, sql);
-                    manager.run(date, table1, table2, i, pageSize, buyer)
+                    manager.run(date, table1, table2, i, pageSize, buyer, year)
                         .then(data => {
                             var result = resultFormatter.ok(apiVersion, 200, data);
                             response.send(200, result);
@@ -74,6 +75,7 @@ function getRouter() {
         var table2 = tables[1].trim();
         var date = o[0];
         var buyer = data.buyer ? data.buyer.code : null;
+        var tahun = data.year;
 
         Promise.all([db, sqlConnect])
             .then((result) => {
@@ -91,7 +93,7 @@ function getRouter() {
                         "october", "november", "december"];
 
                     var tgl = monthOpt.indexOf(date);
-                    var tempYear = new Date().getFullYear().toString();
+                    var tempYear = tahun;
                     var dateStamp;
 
                     if (tgl == 1) {
@@ -148,7 +150,7 @@ function getRouter() {
 
                                     dateStamp = [year, month, day].join('-');
                                 } else {
-                                    var year = new Date().getFullYear();
+                                    var year = tahun;
                                     var month = new Date().getMonth() + 1;
                                     var day = new Date().getDate();
 
@@ -162,7 +164,7 @@ function getRouter() {
                                 }
                             } else {
 
-                                var year = new Date().getFullYear();
+                                var year = tahun;
                                 var month = new Date().getMonth() + 1;
                                 var day = new Date().getDate();
 
