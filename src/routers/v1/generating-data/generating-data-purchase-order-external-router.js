@@ -13,7 +13,7 @@ function getRouter() {
             var manager = new PurchaseOrderExternalManager(db, request.user);
             var sdate = request.params.dateFrom;
             var edate = request.params.dateTo;
-            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
+            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 7;
             
             manager.getAllData(sdate, edate, offset)
                 .then(docs => {
@@ -29,8 +29,8 @@ function getRouter() {
                     var data = [];
                     for (var _data of docs) {
                            var PoExt= _data._id.PoExt;
-                           var TgPoExt= moment(new Date(_data._id.TgPoExt)).format(dateFormat);
-                           var Dlvry= moment(new Date(_data._id.Dlvry)).format(dateFormat);
+                           var TgPoExt= moment(new Date(_data._id.TgPoExt)).add(offset, 'h').format(dateFormat);
+                           var Dlvry= moment(new Date(_data._id.Dlvry)).add(offset, 'h').format(dateFormat);
                            var KdSpl= _data._id.KdSpl;
                            var NmSpl= _data._id.NmSpl;
                            var Ongkir= _data._id.Ongkir;
@@ -64,8 +64,8 @@ function getRouter() {
 
                            var _item = {
                                "PoExt": _data._id.PoExt,
-                               "TgPoExt": moment(new Date(_data._id.TgPoExt)).format(dateFormat),
-                               "Dlvry": moment(new Date(_data._id.Dlvry)).format(dateFormat),
+                               "TgPoExt": moment(new Date(_data._id.TgPoExt)).add(offset, 'h').format(dateFormat),
+                               "Dlvry": moment(new Date(_data._id.Dlvry)) .add(offset , 'h').format(dateFormat),
                                "KdSpl": _data._id.KdSpl,
                                "NmSpl": _data._id.NmSpl,
                                "Ongkir": _data._id.Ongkir,
