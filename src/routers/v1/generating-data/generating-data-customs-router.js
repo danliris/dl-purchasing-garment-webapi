@@ -39,8 +39,8 @@ function getRouter() {
                                 for (var fulfillment of item.fulfillments) {
                                      var _item = {
                                      "NOMOR BEA CUKAI": _data.no,
-                                     "TANGGAL BEA CUKAI": moment(new Date(_data.customsDate)).format(dateFormat),
-                                     "TANGGAL PENGESAHAN": moment(new Date(_data.validateDate)).format(dateFormat),
+                                     "TANGGAL BEA CUKAI": moment(new Date(_data.customsDate)).add(offset, 'h').format(dateFormat),
+                                     "TANGGAL PENGESAHAN": moment(new Date(_data.validateDate)).add(offset, 'h').format(dateFormat),
                                      "TIPE BEA CUKAI": _data.customsType,
                                      "ASAL BEA CUKAI": _data.customsOrigin,
                                      "KODE SUPPLIER": _data.supplier.code,
@@ -51,8 +51,8 @@ function getRouter() {
                                      "NETTO (KG)": _data.netto,
                                      "MATA UANG": _data.currency.code,
                                      "NOMOR SURAT JALAN": SJ.no,
-                                     "TANGGAL SURAT JALAN": moment(new Date(SJ.date)).format(dateFormat),
-                                     "TANGGAL BARANG DATANG": moment(new Date(SJ.supplierDoDate)).format(dateFormat),
+                                     "TANGGAL SURAT JALAN": moment(new Date(SJ.date)).add(offset, 'h').format(dateFormat),
+                                     "TANGGAL BARANG DATANG": moment(new Date(SJ.supplierDoDate)).add(offset, 'h').format(dateFormat),
                                      "NOMOR PO EXTERNAL": item.purchaseOrderExternalNo,
                                      "NOMOR PURCHASE REQUEST": fulfillment.purchaseRequestNo,
                                      "KODE BARANG": fulfillment.product.code,
@@ -62,9 +62,9 @@ function getRouter() {
                                      "HARGA SATUAN BARANG": fulfillment.pricePerDealUnit,
                                      "HARGA TOTAL BARANG": fulfillment.pricePerDealUnit * fulfillment.deliveredQuantity,
                                      "USER INPUT": _data._createdBy,
-                                     "TANGGAL INPUT": moment(new Date(_data._createdDate)).format(dateFormat),
+                                     "TANGGAL INPUT": moment(new Date(_data._createdDate)).add(offset, 'h').format(dateFormat),
                                      "USER EDIT": _data._updatedBy,
-                                     "TANGGAL EDIT": moment(new Date(_data._updatedDate)).format(dateFormat)
+                                     "TANGGAL EDIT": moment(new Date(_data._updatedDate)).add(offset, 'h').format(dateFormat)
                                      }
                                      data.push(_item);
                             }

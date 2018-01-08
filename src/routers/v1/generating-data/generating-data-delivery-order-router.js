@@ -30,8 +30,8 @@ function getRouter() {
                     var data = [];
                     for (var _data of docs) {
                            var NoSJ = _data._id.NoSJ;
-                           var TgSJ = moment(new Date(_data._id.TgSJ)).format(dateFormat);
-                           var TgDtg = moment(new Date(_data._id.TgDtg)).format(dateFormat);
+                           var TgSJ = moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat);
+                           var TgDtg = moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat);
                            var KdSpl = _data._id.KdSpl;
                            var NmSpl = _data._id.NmSpl;
                            var SJDesc = _data._id.SJDesc;
@@ -47,21 +47,18 @@ function getRouter() {
                            var Konversi = _data._id.Koversi;
                            var QtyKcl = _data._id.Koversi * _data._id.QtyDtg;
                            var Tempo = _data._id.Tempo;
-                           var dueDays = new Date(_data._id.TgSJ);
-							   dueDays.setDate(dueDays.getDate() + Tempo);
-					       var TgJT= moment(new Date(dueDays)).format(dateFormat);
                            var MtUang = _data._id.MtUang;
                            var Rate = _data._id.Rate;
                            var UserIn = _data._id.UserIn;
-                           var TgIn = moment(new Date(_data._id.TgIn)).format(dateFormat);
+                           var TgIn = moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat);
                            var UserEd = _data._id.UserEd;
-                           var TgEd = moment(new Date(_data._id.TgEd)).format(dateFormat);
+                           var TgEd = moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat);
                    
                            var _item = {
                                
                                 "NoSJ" : _data._id.NoSJ,
-                                "TgSJ" : moment(new Date(_data._id.TgSJ)).format(dateFormat),
-                                "TgDtg" : moment(new Date(_data._id.TgDtg)).format(dateFormat),
+                                "TgSJ" : moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat),
+                                "TgDtg" : moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat),
                                 "KdSpl" : _data._id.KdSpl,
                                 "NmSpl" : _data._id.NmSpl,
                                 "SJDesc" : _data._id.SJDesc,
@@ -77,13 +74,12 @@ function getRouter() {
                                 "Konversi" : _data._id.Konversi,
                                 "QtyKcl" : _data._id.Konversi * _data._id.QtyDtg,
                                 "Tempo" : _data._id.Tempo,
-                                "TgJT" : moment(new Date(dueDays)).format(dateFormat),
                                 "MtUang" : _data._id.MtUang,
                                 "Rate" : _data._id.Rate,
                                 "UserIn" : _data._id.UserIn,
-                                "TgIn" : moment(new Date(_data._id.TgIn)).format(dateFormat),
+                                "TgIn" : moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat),
                                 "UserEd" : _data._id.UserEd,
-                                "TgEd" : moment(new Date(_data._id.TgEd)).format(dateFormat)                                                      
+                                "TgEd" : moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat)                                                      
                             }
                                 data.push(_item);
                         }    
@@ -107,7 +103,6 @@ function getRouter() {
                                 "Konversi" : "number",
                                 "QtyKcl" : "number",
                                 "Tempo" : "number",
-                                "TgJT" : "date",
                                 "MtUang" : "string",
                                 "Rate" : "number",
                                 "UserIn" : "string", 

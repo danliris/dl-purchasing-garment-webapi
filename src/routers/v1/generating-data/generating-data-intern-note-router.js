@@ -29,20 +29,20 @@ function getRouter() {
                     var data = [];
                     for (var _data of docs) {
                            var NoNI= _data._id.NoNI;
-                           var TgNI= moment(new Date(_data._id.TgNI)).format(dateFormat);
+                           var TgNI= moment(new Date(_data._id.TgNI)).add(offset, 'h').format(dateFormat);
                            var MtUang = _data._id.MtUang;
                            var Rate = _data._id.Rate;
                            var KdSpl = _data._id.KdSpl;
                            var NmSpl = _data._id.NmSpl;
                            var NoInv= _data._id.NoInv;
-                           var TgInv= moment(new Date(_data._id.TgInv)).format(dateFormat);
+                           var TgInv= moment(new Date(_data._id.TgInv)).add(offset, 'h').format(dateFormat);
                            var NoSJ= _data._id.NoSJ;
-                           var TgSJ= moment(new Date(_data._id.TgSJ)).format(dateFormat);
-                           var TgDtg= moment(new Date(_data._id.TgDtg)).format(dateFormat);
+                           var TgSJ= moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat);
+                           var TgDtg= moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat);
                            var Tempo= _data._id.Tempo;
                            var dueDays = new Date(_data._id.TgSJ);
 							   dueDays.setDate(dueDays.getDate() + Tempo);
-					       var TgJT= moment(new Date(dueDays)).format(dateFormat);
+					       var TgJT= moment(new Date(dueDays)).add(offset, 'h').format(dateFormat);
                            var PoExt= _data._id.PoExt;
                            var PlanPO= _data._id.PlanPO;
                            var POID= _data._id.PlanPO+"1";
@@ -56,25 +56,25 @@ function getRouter() {
                            var Harga= _data._id.Harga;  
                            var TotHrg= _data._id.Qty * _data._id.Harga;  
                            var TotNI = _data.TotNI;
-                           var TgIn= moment(new Date(_data._id.TgIn)).format(dateFormat);
+                           var TgIn= moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat);
                            var UserIn= _data._id.UserIn;
-                           var TgEd= moment(new Date(_data._id.TgEd)).format(dateFormat);
+                           var TgEd= moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat);
                            var UserEd = _data._id.UserEd;
                         
                            var _item = {
                                 "NoNI" : _data._id.NoNI,
-                                "TgNI" : moment(new Date(_data._id.TgNI)).format(dateFormat),
+                                "TgNI" : moment(new Date(_data._id.TgNI)).add(offset, 'h').format(dateFormat),
                                 "MtUang" : _data._id.MtUang,
                                 "Rate" : _data._id.Rate,
                                 "KdSpl" : _data._id.KdSpl,
                                 "NmSpl" : _data._id.NmSpl,
                                 "NoInv": _data._id.NoInv,
-                                "TgInv": moment(new Date(_data._id.TgInv)).format(dateFormat),
+                                "TgInv": moment(new Date(_data._id.TgInv)).add(offset, 'h').format(dateFormat),
                                 "NoSJ": _data._id.NoSJ,
-                                "TgSJ": moment(new Date(_data._id.TgSJ)).format(dateFormat),
-                                "TgDtg": moment(new Date(_data._id.TgDtg)).format(dateFormat),
+                                "TgSJ": moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat),
+                                "TgDtg": moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat),
                                 "Tempo": _data._id.Tempo,
-                                "TgJT": moment(new Date(dueDays)).format(dateFormat),
+                                "TgJT": moment(new Date(dueDays)).add(offset, 'h').format(dateFormat),
                                 "PoExt": _data._id.PoExt,
                                 "PlanPO": _data._id.PlanPO,
                                 "POID": _data._id.PlanPO+"1",
@@ -88,9 +88,9 @@ function getRouter() {
                                 "Harga": _data._id.Harga, 
                                 "TotHrg": _data._id.Qty * _data._id.Harga, 
                                 "TotNI" : _data.TotNI,
-                                "TgIn" : moment(new Date(_data._id.TgIn)).format(dateFormat),
+                                "TgIn" : moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat),
                                 "UserIn" : _data._id.UserIn,
-                                "TgEd" : moment(new Date(_data._id.TgEd)).format(dateFormat),
+                                "TgEd" : moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat),
                                 "UserEd" : _data._id.UserEd,   
                             }
                                 data.push(_item);

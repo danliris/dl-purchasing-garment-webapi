@@ -29,7 +29,7 @@ function getRouter() {
                     var data = [];
                     for (var _data of docs) {
                            var NoNK= _data._id.NoNK;
-                           var TgNK= moment(new Date(_data._id.TgNK)).format(dateFormat);
+                           var TgNK= moment(new Date(_data._id.TgNK)).add(offset, 'h').format(dateFormat);
                            var Jenis= _data._id.Jenis;
                            var Ketr= _data._id.Ketr;
                            var MtUang = _data._id.MtUang;
@@ -37,8 +37,8 @@ function getRouter() {
                            var KdSpl=_data._id.KdSpl;
                            var NmSpl=_data._id.NmSpl;
                            var NoSJ=_data._id.NoSJ;
-                           var TgSJ=moment(new Date(_data._id.TgSJ)).format(dateFormat);
-                           var TgDtg=moment(new Date(_data._id.TgDtg)).format(dateFormat);
+                           var TgSJ=moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat);
+                           var TgDtg=moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat);
                            var QtySJ = _data._id.QtySJ;
                            var HrgSJ = _data._id.HrgSJ;
                            var TotSJ = _data._id.TotSJ;
@@ -57,14 +57,14 @@ function getRouter() {
                            var HrgNK = _data._id.Harga - _data._id.HrgSJ;
                            var TotNK = _data._id.Total - _data._id.TotSJ;
                         
-                           var TgIn= moment(new Date(_data._id.TgIn)).format(dateFormat);
+                           var TgIn= moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat);
                            var UserIn= _data._id.UserIn;
-                           var TgEd= moment(new Date(_data._id.TgEd)).format(dateFormat);
+                           var TgEd= moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat);
                            var UserEd = _data._id.UserEd;
                            
                            var _item = {
                                 "NoNK" : _data._id.NoNK,
-                                "TgNK" : moment(new Date(_data._id.TgNK)).format(dateFormat),
+                                "TgNK" : moment(new Date(_data._id.TgNK)).add(offset, 'h').format(dateFormat),
                                 "Jenis" : _data._id.Jenis,
                                 "Ketr" : _data._id.Ketr,
                                 "MtUang" : _data._id.MtUang,
@@ -72,8 +72,8 @@ function getRouter() {
                                 "KdSpl":_data._id.KdSpl,
                                 "NmSpl":_data._id.NmSpl,
                                 "NoSJ":_data._id.NoSJ,
-                                "TgSJ":moment(new Date(_data._id.TgSJ)).format(dateFormat),
-                                "TgDtg":moment(new Date(_data._id.TgDtg)).format(dateFormat),
+                                "TgSJ":moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat),
+                                "TgDtg":moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat),
                                 "QtySJ" : _data._id.QtySJ,
                                 "HrgSJ" : _data._id.HrgSJ,
                                 "TotSJ" : _data._id.TotSJ,
@@ -92,9 +92,9 @@ function getRouter() {
                                 "HrgNK" : _data._id.Harga - _data._id.HrgSJ,
                                 "TotNK" : _data._id.Total - _data._id.TotSJ,
                         
-                                "TgIn" : moment(new Date(_data._id.TgIn)).format(dateFormat),
+                                "TgIn" : moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat),
                                 "UserIn" : _data._id.UserIn,
-                                "TgEd" : moment(new Date(_data._id.TgEd)).format(dateFormat),
+                                "TgEd" : moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat),
                                 "UserEd" : _data._id.UserEd                                
                             }
                                 data.push(_item);
