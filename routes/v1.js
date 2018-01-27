@@ -84,6 +84,7 @@ var v1BudgetDealInternNote = require('../src/routers/v1/generating-data/generati
 var v1BudgetDealInvoice = require('../src/routers/v1/generating-data/generating-data-invoice-router');
 var v1BudgetDealPriceCorrectionNote = require('../src/routers/v1/generating-data/generating-data-correction-note-router');
 var v1BudgetDealQuantityCorrectionNote = require('../src/routers/v1/generating-data/generating-data-quantity-correction-note-router');
+var v1BudgetDealUnitReceiptNote = require('../src/routers/v1/generating-data/generating-data-unit-receipt-note-router');
 
 
 module.exports = function (server) {
@@ -181,5 +182,6 @@ module.exports = function (server) {
     v1BudgetDealInvoice().applyRoutes(server, "/v1/generating-data/invoice");
     v1BudgetDealPriceCorrectionNote().applyRoutes(server, "/v1/generating-data/correction-note");
     v1BudgetDealQuantityCorrectionNote().applyRoutes(server, "/v1/generating-data/quantity-correction-note");
+    v1BudgetDealUnitReceiptNote().applyRoutes(server, "/v1/generating-data/unit-receipt-note");
 
 };
