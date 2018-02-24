@@ -52,6 +52,7 @@ var v1InvoiceNoteNoInternNoteRouter = require('../src/routers/v1/invoice-note/in
 
 // UNIT RECEIPT NOTE
 var v1UnitReceiptNoteMonitoringRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-router');
+var v1UnitReceiptNoteMonitoringAllRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-all-router');
 var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-by-user-router');
 var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-router');
 
@@ -146,6 +147,7 @@ module.exports = function (server) {
     //UNIT RECEIPT NOTE
     // v1UnitReceiptNoteMonitoringByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring/by-user");
     v1UnitReceiptNoteMonitoringRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring");
+    v1UnitReceiptNoteMonitoringAllRouter().applyRoutes(server, "/v1/unit-receipt-note-monitoring-all-router");
     // v1UnitReceiptWithoutSpbRouter().applyRoutes(server, "/v1/unit-receipt-without-spb");
     v1UnitReceiptNoteByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-user");
     // v1UnitPaymentOrderSupplierRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-supplier-unit");
