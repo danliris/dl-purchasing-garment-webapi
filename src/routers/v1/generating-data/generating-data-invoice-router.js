@@ -13,7 +13,7 @@ function getRouter() {
             var manager = new InvoiceNoteManager(db, request.user);
             var sdate = request.params.dateFrom;
             var edate = request.params.dateTo;
-            var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
+            var offset = 7//request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
             
             manager.getAllData(sdate, edate, offset)
                 .then(docs => {
@@ -29,7 +29,7 @@ function getRouter() {
                     var data = [];
                     for (var _data of docs) {
                            var NoInv = _data._id.NoInv;
-                           var TgInv = moment(new Date(_data._id.TgInv)).format(dateFormat);
+                           var TgInv = moment(new Date(_data._id.TgInv)).add(offset, 'h').format(dateFormat);
                            var KdSpl = _data._id.KdSpl;
                            var NmSpl = _data._id.NmSpl;
                           
@@ -39,18 +39,18 @@ function getRouter() {
                            var PakaiPPH= _data._id.PakaiPPH ? "Ya" : "Tidak";
                            var PrsPPH = _data._id.PrsPPH;
                            var NoPPN = _data._id.NoPPN;
-                           var TgPPN = moment(new Date(_data._id.TgPPN)).format(dateFormat);
+                           var TgPPN = moment(new Date(_data._id.TgPPN)).add(offset, 'h').format(dateFormat);
                            
                            var NoPPH = _data._id.NoPPH;
-                           var TgPPH = moment(new Date(_data._id.TgPPH)).format(dateFormat);
+                           var TgPPH = moment(new Date(_data._id.TgPPH)).add(offset, 'h').format(dateFormat);
                            var NmPPH = _data._id.NmPPH;
                            var RatePPH = _data._id.RatePPH;
                            
                            var MtUang = _data._id.MtUang;
                            var Rate = _data._id.Rate;
                            var NoSJ = _data._id.NoSJ;
-                           var TgSJ = moment(new Date(_data._id.TgSJ)).format(dateFormat);
-                           var TgDtg = moment(new Date(_data._id.TgDtg)).format(dateFormat);
+                           var TgSJ = moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat);
+                           var TgDtg = moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat);
                            var PoExt = _data._id.PoExt;
                            var NoRO = _data._id.NoRO;
                            var NoPR = _data._id.NoPR;
@@ -68,13 +68,13 @@ function getRouter() {
                            var TotPPH =  _data.TotInv * _data._id.RatePPH;
                            
                            var UserIn= _data._id.UserIn;
-                           var TgIn= moment(new Date(_data._id.TgIn)).format(dateFormat);
+                           var TgIn= moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat);
                            var UserEd= _data._id.UserEd;
-                           var TgEd= moment(new Date(_data._id.TgEd)).format(dateFormat);
+                           var TgEd= moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat);
 
                            var _item = {
                                 "NoInv" : _data._id.NoInv,
-                                "TgInv" : moment(new Date(_data._id.TgInv)).format(dateFormat),
+                                "TgInv" : moment(new Date(_data._id.TgInv)).add(offset, 'h').format(dateFormat),
                                 "KdSpl" : _data._id.KdSpl,
                                 "NmSpl" : _data._id.NmSpl,
                                 "PakaiPPN" : _data._id.PakaiPPN ? "Ya" : "Tidak",
@@ -82,16 +82,16 @@ function getRouter() {
                                 "PrsPPH" : _data._id.PrsPPH,
                                 "PrsPPN" : _data._id.PakaiPPN ? 10 : 0,
                                 "NoPPN" : _data._id.NoPPN,
-                                "TgPPN" : moment(new Date(_data._id.TgPPN)).format(dateFormat),
+                                "TgPPN" : moment(new Date(_data._id.TgPPN)).add(offset, 'h').format(dateFormat),
                                 "NoPPH"  : _data._id.NoPPH,
-                                "TgPPH" : moment(new Date(_data._id.TgPPH)).format(dateFormat),
+                                "TgPPH" : moment(new Date(_data._id.TgPPH)).add(offset, 'h').format(dateFormat),
                                 "NmPPH": _data._id.NmPPH,
                                 "RatePPH" : _data._id.RatePPH,
                                 "MtUang" : _data._id.MtUang,
                                 "Rate" : _data._id.Rate,
                                 "NoSJ" : _data._id.NoSJ,
-                                "TgSJ" : moment(new Date(_data._id.TgSJ)).format(dateFormat),
-                                "TgDtg" : moment(new Date(_data._id.TgDtg)).format(dateFormat),
+                                "TgSJ" : moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat),
+                                "TgDtg" : moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat),
                                 "PoExt" : _data._id.PoExt,
                                 "NoRO" : _data._id.NoRO,
                                 "NoPR" : _data._id.NoPR,
@@ -107,9 +107,9 @@ function getRouter() {
                                 "TotPPN" :  _data._id.PakaiPPN ? _data.TotInv * 0.1 : 0,
                                 "TotPPH" :  _data.TotInv * _data._id.RatePPH,
                                 "UserIn" : _data._id.UserIn,
-                                "TgIn" : moment(new Date(_data._id.TgIn)).format(dateFormat),
+                                "TgIn" : moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat),
                                 "UserEd" : _data._id.UserEd,
-                                "TgEd" : moment(new Date(_data._id.TgEd)).format(dateFormat) 
+                                "TgEd" : moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat) 
                             }
                                 data.push(_item);
                         }    
