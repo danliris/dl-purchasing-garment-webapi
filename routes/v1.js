@@ -52,6 +52,7 @@ var v1InvoiceNoteNoInternNoteRouter = require('../src/routers/v1/invoice-note/in
 
 // UNIT RECEIPT NOTE
 var v1UnitReceiptNoteMonitoringRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-router');
+var v1UnitReceiptNoteMonitoringAllRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-monitoring-all-router');
 var v1UnitReceiptNoteByUserRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-by-user-router');
 var v1UnitReceiptNoteRouter = require('../src/routers/v1/unit-receipt-note/unit-receipt-note-router');
 
@@ -84,7 +85,7 @@ var v1BudgetDealInternNote = require('../src/routers/v1/generating-data/generati
 var v1BudgetDealInvoice = require('../src/routers/v1/generating-data/generating-data-invoice-router');
 var v1BudgetDealPriceCorrectionNote = require('../src/routers/v1/generating-data/generating-data-correction-note-router');
 var v1BudgetDealQuantityCorrectionNote = require('../src/routers/v1/generating-data/generating-data-quantity-correction-note-router');
-
+var v1BudgetDealUnitReceiptNote = require('../src/routers/v1/generating-data/generating-data-unit-receipt-note-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -146,6 +147,7 @@ module.exports = function (server) {
     //UNIT RECEIPT NOTE
     // v1UnitReceiptNoteMonitoringByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring/by-user");
     v1UnitReceiptNoteMonitoringRouter().applyRoutes(server, "/v1/unit-receipt-notes/monitoring");
+    v1UnitReceiptNoteMonitoringAllRouter().applyRoutes(server, "/v1/unit-receipt-note-monitoring-all-router");
     // v1UnitReceiptWithoutSpbRouter().applyRoutes(server, "/v1/unit-receipt-without-spb");
     v1UnitReceiptNoteByUserRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-user");
     // v1UnitPaymentOrderSupplierRouter().applyRoutes(server, "/v1/unit-receipt-notes/by-supplier-unit");
@@ -181,5 +183,6 @@ module.exports = function (server) {
     v1BudgetDealInvoice().applyRoutes(server, "/v1/generating-data/invoice");
     v1BudgetDealPriceCorrectionNote().applyRoutes(server, "/v1/generating-data/correction-note");
     v1BudgetDealQuantityCorrectionNote().applyRoutes(server, "/v1/generating-data/quantity-correction-note");
+    v1BudgetDealUnitReceiptNote().applyRoutes(server, "/v1/generating-data/unit-receipt-note");
 
 };
