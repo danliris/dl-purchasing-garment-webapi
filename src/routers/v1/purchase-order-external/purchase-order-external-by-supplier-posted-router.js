@@ -35,6 +35,7 @@ function getRouter() {
             var select = [
                 "_id",
                 "no",
+                "paymentMethod",
                 "items.poNo",
                 "items.poId",
                 "items.prNo",
