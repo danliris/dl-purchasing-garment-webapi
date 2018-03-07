@@ -22,6 +22,9 @@ function getRouter() {
                 "supplierId": new ObjectId(query.filter.supplierId),
                 "currency.code": query.filter.currency
             };
+            
+            query.page = 1;
+            query.size = Number.MAX_SAFE_INTEGER;
             query.filter = filter;
 
             manager.read(query)
