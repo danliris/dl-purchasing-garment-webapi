@@ -37,7 +37,7 @@ var v1DeliveryOrderBySupplierRouter = require('../src/routers/v1/delivery-order/
 var v1DeliveryOrderNoInvoiceRouter = require('../src/routers/v1/delivery-order/delivery-order-no-invoice-router');
 var v1DeliveryOrderByUserRouter = require('../src/routers/v1/delivery-order/delivery-order-by-user-router');
 var v1DeliveryOrderRouter = require('../src/routers/v1/delivery-order/delivery-order-router');
-
+var v1DeliveryOrderBasicRouter = require('../src/routers/v1/delivery-order/delivery-order-router-basic');
 // CUSTOMS
 var v1CustomsRouter = require('../src/routers/v1/customs/customs-router');
 var v1MonitoringCustomsRouter = require('../src/routers/v1/customs/customs-monitoring-router');
@@ -131,7 +131,7 @@ module.exports = function (server) {
     v1DeliveryOrderNoInvoiceRouter().applyRoutes(server, "/v1/delivery-orders/no-invoice");
     v1DeliveryOrderByUserRouter().applyRoutes(server, "/v1/delivery-orders/by-user");
     v1DeliveryOrderRouter().applyRoutes(server, "/v1/delivery-orders");
-
+    v1DeliveryOrderBasicRouter().applyRoutes(server,"/v1/basic-delivery-orders")
     //CUSTOMS
     v1MonitoringCustomsRouter().applyRoutes(server, "/v1/customs/reports");
     v1CustomsRouter().applyRoutes(server, "/v1/customs");
