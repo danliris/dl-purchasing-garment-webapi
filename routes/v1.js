@@ -14,6 +14,8 @@ var v1PurchaseOrderReportRouter = require('../src/routers/v1/report/purchase-ord
 var v1PurchaseOrderMonitoringReportRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-report-router');
 var v1PurchaseOrderMonitoringAllUserRouter = require('../src/routers/v1/purchase-order/purchase-order-monitoring-report-all-user-router');
 
+var v1PurchaseOrderKedatanganRouter = require('../src/routers/v1/purchase-order/kedatangan-router');
+var v1PurchaseOrderKedatanganSubRouter = require('../src/routers/v1/purchase-order/kedatangansub-router');
 // PURCHASE ORDER EXTERNAL
 var v1PurchaseOrderExternalPostRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-post-router');
 var v1PurchaseOrderExternalApproveRouter = require('../src/routers/v1/purchase-order-external/purchase-order-external-approve-router');
@@ -102,6 +104,9 @@ module.exports = function (server) {
     v1PurchaseOrderSplitRouter().applyRoutes(server, "/v1/purchase-orders/split");
     v1PurchaseOrderByUserRouter().applyRoutes(server, "/v1/purchase-orders/by-user");
     v1PurchaseOrderRouter().applyRoutes(server, "/v1/purchase-orders");
+
+    v1PurchaseOrderKedatanganRouter().applyRoutes(server, "/v1/purchase-orders/kedatangan");
+    v1PurchaseOrderKedatanganSubRouter().applyRoutes(server, "/v1/purchase-orders/kedatangansub");
 
     //report
     v1PurchaseOrderReportRouter().applyRoutes(server, "/v1/purchase-orders-report");
