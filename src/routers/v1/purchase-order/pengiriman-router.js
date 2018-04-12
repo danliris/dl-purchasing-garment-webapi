@@ -13,10 +13,9 @@ function getRouter() {
             var manager = new Manager(db, request.user);
             var dateFrom = request.params.dateFrom;
             var dateTo = request.params.dateTo;
-            var kategori = request.params.kategori;
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-           manager.getDataTest(dateFrom, dateTo, kategori,offset)
+           manager.getDataKirim(dateFrom, dateTo,offset)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
@@ -31,7 +30,7 @@ function getRouter() {
 
                         var data = [];
                         var index = 0;
-                       for (var purchaseRequest of docs) {
+                        for (var purchaseRequest of docs) {
                                 index++;
                         
                                 var _item = {
@@ -49,7 +48,7 @@ function getRouter() {
                             "OK %": "string",
                             "Jumlah": "string",
                         };
-                      response.xls(`Monitoring Ketepatan Kedatangan ${kategori}  - ${moment(dateFrom).format(dateFormat2)} - ${moment(dateTo).format(dateFormat2)}.xlsx`, data, options);
+                        response.xls(`Monitoring Ketepatan Pengiriman - ${moment(dateFrom).format(dateFormat2)} - ${moment(dateTo).format(dateFormat2)}.xlsx`, data, options);
 
                     }
                 })
