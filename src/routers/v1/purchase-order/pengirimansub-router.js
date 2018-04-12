@@ -12,13 +12,13 @@ function getRouter() {
         db.get().then(db => {
            var manager = new Manager(db, request.user);
            var supplier = request.params.supplier;
-           var kategori = request.params.kategori;
+          
            var dateFrom = request.params.dateFrom;
            var dateTo = request.params.dateTo;
     
             var offset = request.headers["x-timezone-offset"] ? Number(request.headers["x-timezone-offset"]) : 0;
 
-           manager.getDataTestSub(supplier,dateFrom,dateTo,kategori,offset)
+           manager.getDataKirimSub(supplier,dateFrom,dateTo,offset)
                 .then(docs => {
                     if ((request.headers.accept || '').toString().indexOf("application/xls") < 0) {
                         var result = resultFormatter.ok(apiVersion, 200, docs);
@@ -35,21 +35,15 @@ function getRouter() {
                         var index = 0;
                         for (var purchaseRequest of docs) {
                                 index++;
-                                var ket='';
-            if(purchaseRequest.category =='FABRIC' || purchaseRequest.category =='SUBKON' ){
-                   if(purchaseRequest.selisih >=30 ){
-                         ket='OK';
-                     }else{
+                 var ket='';
+            
+                if(purchaseRequest.selisih > 5 ){
                          ket='NOT OK';
-                     }
-            }else{
-                if(purchaseRequest.selisih >=20 ){
-                         ket='OK';
                      }else{
-                         ket='NOT OK';
+                         ket='OK';
                      }
-            }
-                               var _item = {
+         
+                                var _item = {
                                     "No": index,
                                     "Supplier": purchaseRequest.supplier,
                                     "Plan PO": purchaseRequest.refNo,
@@ -61,8 +55,8 @@ function getRouter() {
                                     "Ket Barang": purchaseRequest.productdescription,
                                     "Artikel": purchaseRequest.artikel,
                                     "RO": purchaseRequest.roNo,
-                                    "Tgl Shipment": moment(new Date(purchaseRequest.purchaseRequestshipmentDate)).add(offset, 'h').format(dateFormat),
-                                    "Tgl Datang": moment(new Date(purchaseRequest.tglll)).add(offset, 'h').format(dateFormat),
+                                    "Tgl Estimasi Datang": moment(new Date(purchaseRequest.purchaseRequestshipmentDate)).add(offset, 'h').format(dateFormat),
+                                    "Tgl Surat Jalan": moment(new Date(purchaseRequest.tglll)).add(offset, 'h').format(dateFormat),
                                     "+/- Datang": ket,
                                     "Staff": purchaseRequest._createdBy,
                                     
@@ -82,12 +76,12 @@ function getRouter() {
                             "Ket Barang": "string",
                             "Artikel": "string",
                             "RO": "string",
-                            "Tgl Shipment": "string",
-                            "Tgl Datang": "string",
+                            "Tgl Estimasi Datang": "string",
+                            "Tgl Surat Jalan": "string",
                             "+/- Datang":"string",
                             "Staff": "string",
                         };
-                        response.xls(`Monitoring Detail Ketepatan Kedatangan ${kategori} - ${moment(dateFrom).format(dateFormat2)} - ${moment(dateTo).format(dateFormat2)}.xlsx`, data, options);
+                        response.xls(`Monitoring Detail Ketepatan Pengiriman - ${moment(dateFrom).format(dateFormat2)} - ${moment(dateTo).format(dateFormat2)}.xlsx`, data, options);
 
                     }
                 })
