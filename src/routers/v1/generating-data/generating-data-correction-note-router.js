@@ -28,6 +28,7 @@ function getRouter() {
                     moment.locale(locale);
                     var data = [];
                     for (var _data of docs) {
+                       if (_data._id.itemsProdId.toString() === _data._id.fulProdId) {
                            var NoNK= _data._id.NoNK;
                            var TgNK= moment(new Date(_data._id.TgNK)).add(offset, 'h').format(dateFormat);
                            var Jenis= _data._id.Jenis;
@@ -40,7 +41,6 @@ function getRouter() {
                            var TgSJ=moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat);
                            var TgDtg=moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat);
                            var QtySJ = _data._id.QtySJ;
-                           var HrgSJ = _data._id.HrgSJ;
                            var TotSJ = _data._id.TotSJ;
                            var POExt=_data._id.POExt;
                            var NoPR=_data._id.NoPR;
@@ -54,7 +54,6 @@ function getRouter() {
                            var Total = _data._id.Total;
                            
                            var QtyNK = _data._id.Qty - _data._id.QtySJ;
-                           var HrgNK = _data._id.Harga - _data._id.HrgSJ;
                            var TotNK = _data._id.Total - _data._id.TotSJ;
                         
                            var TgIn= moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat);
@@ -75,7 +74,6 @@ function getRouter() {
                                 "TgSJ":moment(new Date(_data._id.TgSJ)).add(offset, 'h').format(dateFormat),
                                 "TgDtg":moment(new Date(_data._id.TgDtg)).add(offset, 'h').format(dateFormat),
                                 "QtySJ" : _data._id.QtySJ,
-                                "HrgSJ" : _data._id.HrgSJ,
                                 "TotSJ" : _data._id.TotSJ,
                                 "POExt":_data._id.POExt,
                                 "NoPR":_data._id.NoPR,
@@ -89,7 +87,6 @@ function getRouter() {
                                 "Total" : _data._id.Total,
 
                                 "QtyNK" : _data._id.Qty - _data._id.QtySJ,
-                                "HrgNK" : _data._id.Harga - _data._id.HrgSJ,
                                 "TotNK" : _data._id.Total - _data._id.TotSJ,
                         
                                 "TgIn" : moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat),
@@ -98,7 +95,8 @@ function getRouter() {
                                 "UserEd" : _data._id.UserEd                                
                             }
                                 data.push(_item);
-                        }    
+                        }  
+                    }  
 
                         var options = {
                                         "NoNK" : "string",
@@ -113,7 +111,6 @@ function getRouter() {
                                         "TgSJ":"date",
                                         "TgDtg":"date",
                                         "QtySJ" : "number",
-                                        "HrgSJ" : "number",
                                         "TotSJ" : "number",
                                         "POExt":"string",
                                         "NoPR":"string",
@@ -126,7 +123,6 @@ function getRouter() {
                                         "Harga" : "number",
                                         "Total" : "number",
                                         "QtyNK" : "number",
-                                        "HrgNK" : "number",
                                         "TotNK" : "number",
                                         "TgIn" : "date",
                                         "UserIn" : "string",

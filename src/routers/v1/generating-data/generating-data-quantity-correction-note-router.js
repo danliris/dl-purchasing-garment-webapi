@@ -28,6 +28,7 @@ function getRouter() {
                     moment.locale(locale);
                     var data = [];
                     for (var _data of docs) {
+                         if (_data._id.itemsProdId.toString() === _data._id.fulProdId) {
                            var NoNK= _data._id.NoNK;
                            var TgNK= moment(new Date(_data._id.TgNK)).add(offset, 'h').format(dateFormat);
                            var Jenis= _data._id.Jenis;
@@ -88,6 +89,7 @@ function getRouter() {
                             }
                                 data.push(_item);
                         }    
+                    }
 
                         var options = {
                                         "NoNK" : "string",
@@ -101,7 +103,7 @@ function getRouter() {
                                         "NoSJ":"string",
                                         "TgSJ":"date",
                                         "TgDtg":"date",
-                                        "Qty" : "number",
+                                        "QtySJ" : "number",
                                         "POExt":"string",
                                         "NoPR":"string",
                                         "PlanPO":"string",

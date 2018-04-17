@@ -32,20 +32,16 @@ function getRouter() {
                            var TgInv = moment(new Date(_data._id.TgInv)).add(offset, 'h').format(dateFormat);
                            var KdSpl = _data._id.KdSpl;
                            var NmSpl = _data._id.NmSpl;
-                          
                            var PakaiPPN= _data._id.PakaiPPN ? "Ya" : "Tidak";
                            var PrsPPN= _data._id.PakaiPPN ? 10 : 0;
-
                            var PakaiPPH= _data._id.PakaiPPH ? "Ya" : "Tidak";
                            var PrsPPH = _data._id.PrsPPH;
                            var NoPPN = _data._id.NoPPN;
                            var TgPPN = moment(new Date(_data._id.TgPPN)).add(offset, 'h').format(dateFormat);
-                           
                            var NoPPH = _data._id.NoPPH;
                            var TgPPH = moment(new Date(_data._id.TgPPH)).add(offset, 'h').format(dateFormat);
                            var NmPPH = _data._id.NmPPH;
                            var RatePPH = _data._id.RatePPH;
-                           
                            var MtUang = _data._id.MtUang;
                            var Rate = _data._id.Rate;
                            var NoSJ = _data._id.NoSJ;
@@ -63,15 +59,16 @@ function getRouter() {
                            var HrgTot = _data._id.QtyInv * _data._id.HrgInv;
                            var TQtyInv = _data.TQtyInv;
                            var TotInv = _data.TotInv;
-                           
                            var TotPPN =  _data._id.PakaiPPN ? _data.TotInv * 0.1 : 0;
                            var TotPPH =  _data.TotInv * _data._id.RatePPH;
-                           
                            var UserIn= _data._id.UserIn;
                            var TgIn= moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat);
                            var UserEd= _data._id.UserEd;
                            var TgEd= moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat);
-
+                           var BayarPajak= _data._id.BayarPajak ? "Ya" : "Tidak";
+                           var NoInvPPN = _data._id.NoInvPPN;
+                           var NoInvPPH = _data._id.NoInvPPH;
+                           
                            var _item = {
                                 "NoInv" : _data._id.NoInv,
                                 "TgInv" : moment(new Date(_data._id.TgInv)).add(offset, 'h').format(dateFormat),
@@ -109,7 +106,10 @@ function getRouter() {
                                 "UserIn" : _data._id.UserIn,
                                 "TgIn" : moment(new Date(_data._id.TgIn)).add(offset, 'h').format(dateFormat),
                                 "UserEd" : _data._id.UserEd,
-                                "TgEd" : moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat) 
+                                "TgEd" : moment(new Date(_data._id.TgEd)).add(offset, 'h').format(dateFormat),
+                                "BayarPajak" : _data._id.BayarPajak ? "Ya" : "Tidak",
+                                "NoInvPPN" : _data._id.NoInvPPN,
+                                "NoInvPPH"  : _data._id.NoInvPPH,
                             }
                                 data.push(_item);
                         }    
@@ -125,6 +125,7 @@ function getRouter() {
                                         "PrsPPN" : "number",
                                         "NoPPN" : "string",
                                         "TgPPN" : "date",
+                                        "NoPPN"  : "string",
                                         "NoPPH"  : "string",
                                         "TgPPH" : "date",
                                         "NmPPH": "string",
@@ -149,7 +150,10 @@ function getRouter() {
                                         "UserIn" : "string", 
                                         "TgIn" : "date", 
                                         "UserEd" : "string", 
-                                        "TgEd" : "date"     
+                                        "TgEd" : "date",
+                                        "BayarPajak" : "string", 
+                                        "NoInvPPN" : "string",
+                                        "NoInvPPH" : "string"                                        
                                        };
                    
                      if(sdate!=undefined && edate!=undefined)
