@@ -91,6 +91,9 @@ var v1PurchasePriceCorrectionReturnNotePpnRouter = require('../src/routers/v1/pu
 var v1PurchaseQuantityCorrectionReturnNotePphRouter = require('../src/routers/v1/purchase-correction/purchase-quantity-correction-return-note-pph-router');
 var v1PurchaseQuantityCorrectionReturnNotePpnRouter = require('../src/routers/v1/purchase-correction/purchase-quantity-correction-return-note-ppn-router');
 
+//DURATION REPORT
+var v1PurchaseOrderPurchaseOrderExternalDurationReportRouter = require('../src/routers/v1/duration-report/purchase-order-purchase-order-external-duration-report-router');
+
 module.exports = function (server) {
     //PURCHASE REQUEST
     v1PurchaseRequestByTagsRouter().applyRoutes(server, "/purchase-requests/by-tags");
@@ -189,5 +192,8 @@ module.exports = function (server) {
     v1PurchasePriceCorrectionRouter().applyRoutes(server, "/purchase-price-corrections");
     v1PurchasePriceCorrectionMonitoringRouter().applyRoutes(server, "/purchase-price-correction/monitoring");
     v1PurchaseQuantityCorrectionMonitoringRouter().applyRoutes(server, "/purchase-quantity-correction/monitoring");
+
+    //DURATION REPORT
+    v1PurchaseOrderPurchaseOrderExternalDurationReportRouter().applyRoutes(server,   "/duration-report/purchase-order-to-purchase-order-external-duration-reports");
 
 };
