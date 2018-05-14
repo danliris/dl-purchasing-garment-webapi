@@ -92,6 +92,9 @@ var v1BudgetDealPriceCorrectionNote = require('../src/routers/v1/generating-data
 var v1BudgetDealQuantityCorrectionNote = require('../src/routers/v1/generating-data/generating-data-quantity-correction-note-router');
 var v1BudgetDealUnitReceiptNote = require('../src/routers/v1/generating-data/generating-data-unit-receipt-note-router');
 
+//DURATION REPORT
+var v1PurchaseOrderPurchaseOrderExternalDurationReportRouter = require('../src/routers/v1/duration-report/purchase-order-purchase-order-external-duration-report-router');
+
 module.exports = function (server) {
     //PURCHASE REQUEST
     v1PurchaseRequestByTagsRouter().applyRoutes(server, "/v1/purchase-requests/by-tags");
@@ -195,5 +198,8 @@ module.exports = function (server) {
     v1BudgetDealPriceCorrectionNote().applyRoutes(server, "/v1/generating-data/correction-note");
     v1BudgetDealQuantityCorrectionNote().applyRoutes(server, "/v1/generating-data/quantity-correction-note");
     v1BudgetDealUnitReceiptNote().applyRoutes(server, "/v1/generating-data/unit-receipt-note");
+
+    //DURATION REPORT
+    v1PurchaseOrderPurchaseOrderExternalDurationReportRouter().applyRoutes(server, "/v1/duration-report/purchase-order-to-purchase-order-external-duration-reports");
 
 };
