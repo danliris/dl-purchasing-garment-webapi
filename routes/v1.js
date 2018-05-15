@@ -94,6 +94,7 @@ var v1BudgetDealUnitReceiptNote = require('../src/routers/v1/generating-data/gen
 
 //DURATION REPORT
 var v1PurchaseOrderPurchaseOrderExternalDurationReportRouter = require('../src/routers/v1/duration-report/purchase-order-purchase-order-external-duration-report-router');
+var v1PurchaseOrderExternalDeliveryOrderDurationReportRouter = require('../src/routers/v1/duration-report/purchase-order-external-delivery-order-duration-report-router');
 
 module.exports = function (server) {
     //PURCHASE REQUEST
@@ -201,5 +202,6 @@ module.exports = function (server) {
 
     //DURATION REPORT
     v1PurchaseOrderPurchaseOrderExternalDurationReportRouter().applyRoutes(server,   "/v1/duration-report/purchase-order-to-purchase-order-external-duration-reports");
+    v1PurchaseOrderExternalDeliveryOrderDurationReportRouter().applyRoutes(server,   "/v1/duration-report/purchase-order-external-delivery-order-duration-report-router");
 
 };
